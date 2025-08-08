@@ -1,0 +1,14 @@
+<!-- custom checkbox component -->
+<label class="checkbox" [ngClass]="{'is-disabled': disabled}">
+  <input
+    type="checkbox"
+    [checked]="value"
+    (change)="value = !value"
+    [disabled]="disabled"
+  />
+  <div class="icon-checkbox align-item-center">
+    <!-- <span class="check align-item-center" inlineSVG="assets/icons/check.svg"></span> -->
+    <img class="check align-item-center"  [src]="'assets/icons/check.svg'"  />
+  </div>
+  <span class="checkbox-label"><ng-content></ng-content></span>
+</label>

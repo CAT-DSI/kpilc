@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import 'ngx-toastr/toastr';
+
+// bootstrap style toast
+// or import a bootstrap 4 alert styled design (SASS ONLY)
+// should be after your bootstrap imports, it uses bs4 variables, mixins, functions
+
+
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700"); // Open Sans font
+@import "node_modules/bootstrap/scss/bootstrap";  // boostrap 4
+@import "styles/index"; // custom
+
+@font-face {
+  font-family: 'Raleway-Bold';
+  src: url('assets/fonts/Raleway-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'Raleway-SemiBold';
+  src: url('assets/fonts/Raleway-SemiBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// bootstrap style toast
+// or import a bootstrap 4 alert styled design (SASS ONLY)
+// should be after your bootstrap imports, it uses bs4 variables, mixins, functions
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  // font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: 'Raleway-Bold', sans-serif;
+}
+
+.alert-red {
+  padding: 20px;
+  background-color: red;
+  color: white;
+}
+.mycsssnackbartest{
+  content: "\a";
+  white-space: pre;
+  background-color: red;
+  color: white;
+  word-wrap: break-word !important;
+     max-width: 45vw !important;
+}
+
+.alert-success {
+  padding: 20px;
+  background-color: rgb(4, 209, 89);
+  color: white;
+}

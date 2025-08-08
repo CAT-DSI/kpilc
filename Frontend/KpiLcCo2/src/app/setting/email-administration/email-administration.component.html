@@ -1,0 +1,70 @@
+<app-sub-header [breadcrumbs]="breadcrumbs">
+
+  <div class="search-box" style=" height: 100%;
+  min-height: 30px;
+  width: 250px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #e7e7e7;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;">
+    <input type="text" placeholder="{{ 'placeholders.search' | translate: { default: 'Search'} }}" [(ngModel)]="search"
+      (change)="saverange()" />
+
+    <img class="icon" style="margin-left: 12%;" [src]="'assets/icons/search.svg'" />
+  </div>
+
+  <div class="btns-group">
+    <button class="btn btn-primary" (click)="addUser()">
+      <span class="with-icon">
+        <img class="icon" [src]="'assets/icons/add-new.svg'" />
+        <span>{{ 'buttons.addNew' | translate: { default: 'Add New' } }}</span>
+      </span>
+    </button>
+  </div>
+</app-sub-header>
+<!-- message-display.component.html -->
+<div *ngIf="message" class="message-container">
+  <div [ngClass]="[messageType]" class="message">
+    {{ message }}
+  </div>
+</div>
+
+<div class="customeButton">
+  <!-- Column visibility toggle button -->
+  <button mat-raised-button (click)="toggleColumnVisibility($event)" style="font-family: 'Raleway-SemiBold', sans-serif;">
+    <!-- <img class="icon" style="width: 35px; height: 35px; margin-right: 1px;" [src]="'assets/icons/customize-icon.png'" /> -->
+     Customize Columns
+  </button>
+
+  <!-- Column Visibility Toggles -->
+  <div class="column-visibility-toggles" *ngIf="showColumnSelector">
+    <div *ngFor="let column of tableColumns">
+      <label>
+        <input type="checkbox" class="toggle-checkbox" [(ngModel)]="column.visible" 
+        (change)="toggleColumnSelection(column, column.visible)" />
+        {{ column.name }}
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+  <app-ngx-table-wrapper class="new-component-table" [rows]="tableRows | filter:search | paginate : pagingConfig"
+    [columnsConfig]="visibleColumns" [colMinWidth]="colMinWidth"
+    [colHeaderTranslateKeyPrefix]="colHeaderTranslateKeyPrefix" [totalRows]="totalRows" [hasActionCol]="true"
+    (editRow)="editUser($event)" (deleteRow)="deleteUser($event)"[selectionType]="selection" [showPagination]="false"
+    [selectedRow]="selectedSession" (pageSortEvent)="onPageSort($event)">
+  </app-ngx-table-wrapper>
+  <div class="d-flex justify-content-center">
+    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)" >
+    </pagination-controls>
+  </div>
+</div>
+
+<ng-template #chkboxColCellTmpl let-row="row" let-value="value" let-rowIndex="rowIndex" let-isSelected="isSelected">
+  <app-checkbox [ngModel]="row.isDelayReport" [disabled]="true" (ngModelChange)="true"></app-checkbox>
+</ng-template>
+
+<!-- <Footer [updateinfo]="updateinfo"></Footer> -->

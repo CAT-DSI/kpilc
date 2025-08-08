@@ -1,0 +1,100 @@
+
+<div fxLayout="row"  fxLayoutGap='15px' >
+ 
+  <app-search-box
+    class="search-box"
+    [searchText]="geoPoleTableFilters?.name"
+    (searchTrigger)="searchcharacter($event)"
+  ></app-search-box>
+ 
+  </div>
+  
+  
+  <mat-card  class="reports" >
+      <mat-toolbar class="reportviewer-header">
+        <span translate="TableHeader.Reports" [translateParams]="{default: 'Reports'}" style="font-family: 'Raleway-Bold', sans-serif;"></span>
+        <span class="example-spacer"></span>
+        <div align="end">
+          <div fxLayout="row" id="buttoncssdisplay" fxLayoutGap='15px'>
+            <button type="button"  type="button" 
+            [routerLink]="[target]" [disabled]="disabled" class="button">
+            <span class="with-icon">
+              <span translate="TableHeader.open" [translateParams]="{default: 'Open'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+              <!-- <span class="icon"   inlineSVG="assets/icons/icons8-external-link.svg"></span> -->
+            </span>
+          </button>
+        
+            <button type="button"   *ngIf="user && user.isAdmin && user.reader" mat-flat-button type="button" 
+            [routerLink]="[targetConfig]" [disabled]="disabled" class="button" style="background-color:#00518f">
+            <span class="with-icon">
+              <span>Configuration</span>
+              <span class="icon" inlineSVG="assets/icons/Config.svg"></span>
+            </span>
+          </button>
+            </div>
+        </div> 
+    </mat-toolbar>
+    <mat-card-content>
+      <div class="mat-elevation-z8">
+      <table mat-table 
+      mat-table [dataSource]="data" class="example-table"
+       matSort matSortActive="created" matSortDirection="asc" matSortDisableClear >
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <!-- <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container> -->
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="name" class="headerstyle">
+          <th mat-header-cell *matHeaderCellDef     class="headerstyle" mat-sort-header>  <span translate="TableHeader.Name" [translateParams]="{default: 'Name'}"></span>  </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="label" class="headerstyle">
+          <th mat-header-cell *matHeaderCellDef  class="headerstyle" mat-sort-header> <span translate="TableHeader.Label" [translateParams]="{default: 'Label'}"></span>  </th>
+          <td mat-cell *matCellDef="let element"> {{element.label}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="updatedOn" class="headerstyle">
+          <th mat-header-cell *matHeaderCellDef  class="headerstyle" mat-sort-header> <span translate="TableHeader.UpdatedOn" [translateParams]="{default: 'Updated on'}"></span> </th>
+          <td mat-cell *matCellDef="let element"> {{ element.updatedOn | momentPipe: 'dddd D MMM YYYY' }} </td>
+        </ng-container>
+        
+        <!-- <ng-container matColumnDef="ID">
+          <th mat-header-cell *matHeaderCellDef>id</th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container> -->
+
+        <ng-container matColumnDef="status" class="headerstyle">
+          <th mat-header-cell *matHeaderCellDef  class="headerstyle" mat-sort-header> <span translate="TableHeader.Status" [translateParams]="{default: 'Status'}"></span> </th>
+          <td mat-cell *matCellDef="let element"> {{ element.status | reportStatusPipe }} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="category" class="headerstyle">
+          <th mat-header-cell *matHeaderCellDef  class="headerstyle" mat-sort-header> <span translate="TableHeader.Category" [translateParams]="{default: 'Category'}"></span> </th>
+          <td mat-cell *matCellDef="let element"> {{element.category.name}} </td>
+        </ng-container>
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="scheduled" class="headerstyle">
+          <th mat-header-cell *matHeaderCellDef  class="headerstyle" mat-sort-header> <span translate="TableHeader.Scheduled" [translateParams]="{default: 'Scheduled'}"></span> </th>
+          <td mat-cell *matCellDef="let element">  {{ element.scheduled }}  </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="headerstyle"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"  [ngClass]="{'highlight': ID == row.id}"
+        (click)="highlight(row)"></tr>
+      </table>
+      <mat-paginator showFirstLastButtons [pageSize]="8"></mat-paginator>
+    </div>
+    </mat-card-content>
+  </mat-card>
+
+
+ 

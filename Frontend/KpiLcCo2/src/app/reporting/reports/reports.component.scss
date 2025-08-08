@@ -1,0 +1,228 @@
+
+table {
+    width: 100%;
+  }
+  .search-box{
+    margin-top:5px !important;
+    width: 135px !important;
+    font-family: 'Raleway-SemiBold', sans-serif;
+  }
+  tr.mat-row{
+    height: 40px !important;
+}
+  .icon
+  {
+
+    width: 16px;
+    height: 14px;
+    padding-bottom: 5px !important;
+    padding-left: 4px !important;
+  }
+  #buttoncssdisplay{
+    display: inline-block;
+    margin-right: 21px;
+    padding: 0 16px;
+    color: #ffffff;
+    background-color: #00518f;
+    outline: none;
+    box-shadow: none;
+    font-family: "Open Sans",Arial,sans-serif !important;
+    height: 40px;
+    font-size: 14px !important;    
+    border-radius: 10px;
+    text-transform: capitalize;
+    font-weight: 400;
+}
+
+  .button{
+    font-size: 13px !important;
+    padding: 0 10px !important;
+
+    height: 30px !important;
+
+    font-weight: 400  !important;
+
+    border-radius: 4px !important;
+
+    text-transform: capitalize !important;
+
+    color: #fff !important;
+
+    height:35px !important;
+
+   
+
+  }
+
+
+  .highlight{
+    background:#ccc; /* green */
+    color:white !important;
+  }
+.headerstyle{
+  background-color: #00518f;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    align-items: center;
+    height: 44px !important;
+    font-family: 'Raleway-Bold', sans-serif;
+}
+
+
+  .reports {
+    flex : 1 auto;
+    //height:79vh;
+}
+::ng-deep {
+    
+  .btns-group {
+
+    .btn {
+      margin-left: 10px;
+
+      &.btn-download,
+      &.btn-upload {
+
+        .icon svg {
+          width: 16px;
+          height: 14px;
+        }
+      }
+    }
+  }
+}
+.btn.btn-primary, .btn.btn-primary:not(:disabled) {
+  /* color: #fff; */
+  background-color: #00518f;
+  /* outline: 0; */
+  box-shadow: none;
+}
+.btn {
+  font-size: 13px;
+  padding: 0 10px;
+  height: 30px;
+  font-weight: 400;
+  border-radius: 4px;
+  text-transform: capitalize;
+  color: #fff;
+}
+// ::ng-deep .mat-sort-header-arrow[style] {
+//   // Hide default arrow stem
+//   ::ng-deep .mat-sort-header-arrow {
+//     transform: none !important;
+//     opacity: 1 !important;
+// }
+//   .mat-sort-header-indicator {
+//     opacity: 1;
+//     color: black;
+//     font-weight: bold;
+
+//     // // Hide default arrow as its composed of left, right and middle
+//     // .mat-sort-header-pointer-left,
+//     // .mat-sort-header-pointer-right,
+//     // .mat-sort-header-pointer-middle {
+//     //   display: none;
+//     // }
+//   }
+// }
+
+  ::ng-deep .mat-sort-header-arrow{
+      transform: none !important;
+      opacity: 1 !important;
+      // transform: rotate(-45deg);
+      // top: -0em;
+      // position: absolute;
+      font-size: 20px;
+      color: white;
+      line-height: 10px;
+  }
+
+
+
+My custom ascending arrow
+[aria-sort='ascending'] {
+  ::ng-deep .mat-sort-header-arrow {
+    .mat-sort-header-indicator {
+      &::before {
+        content: '\25B4';
+      
+      }
+    }
+  }
+}
+
+My custom descending arrow
+[aria-sort='descending'] {
+  ::ng-deep .mat-sort-header-arrow {
+    .mat-sort-header-indicator {
+      &::before {
+        content: '\25BE';
+       
+      }
+    }
+  }
+}
+
+
+.reportviewer-header {
+    //background: transparent;
+    margin: 0px;
+    height: 74%;
+  
+}
+
+.reportcard-header {
+    margin: 0px;
+    padding: 0px;
+  
+    
+}
+.mat-card>:first-child, .mat-card-content>:first-child {
+  margin-top: 9px;
+}
+
+.mat-card.reports {
+  padding: 0px;
+  //background: 	#000033;
+  border-radius:0px;
+}
+
+.mat-flat-button{
+  border-radius:0px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-card-header-text {
+  margin: 0px !important;
+  
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 0px !important; 
+  padding:0px;
+}
+
+.input-form-content {
+  //max-height:70vh;
+  overflow: auto;
+}
+
+::ng-deep snack-bar-container.alert-red{
+  padding: 20px;
+  background-color: red;
+  color: white;
+}
+
+::ng-deep snack-bar-container.alert-success{
+    padding: 20px;
+    background-color: rgb(4, 209, 89);
+    color: white;
+  }
+
+  .mat-cell{
+    font-family: 'Raleway-SemiBold', sans-serif;
+  }

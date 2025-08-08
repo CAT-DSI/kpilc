@@ -1,0 +1,77 @@
+.main-container{
+    flex: 1 auto;
+}
+
+.criterias {
+  width: 280px;
+  height:87vh;
+}
+
+.input-form-content {
+    //height:88vh;
+    overflow:hidden;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+
+.mat-card.criterias {
+    //padding: 0px;
+    //background: 	#000033;
+    border-radius:0px;
+    background:transparent;
+}
+
+.arrow {
+    cursor: pointer;
+}
+
+.mat-card.criterias:not([class*=mat-elevation-z]) {
+    box-shadow:none;
+    /* box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12); */
+}
+
+.mat-card.report {
+    padding: 0px;
+    //background: 	#000033;
+    border-radius:0px;
+}
+
+.report {
+    flex : 1 auto;
+    height:87vh;
+    overflow:hidden;
+}
+
+::ng-deep .mat-card-header-text {
+    margin: 0px; 
+    padding:0px;
+  }
+
+  .mat-card-header-text {
+    margin: 0px !important;
+}
+
+.report {
+    flex : 1 auto;
+    height:87vh;
+    overflow:hidden;
+}
+
+.reportviewer-header {
+    //background: transparent;
+    margin: 0px;
+    height:7vh;
+}
+
+.mat-flat-button{
+    border-radius:0px;
+}
+
+.reportcard-header {
+    margin: 0px;
+    padding: 0px;
+}
+

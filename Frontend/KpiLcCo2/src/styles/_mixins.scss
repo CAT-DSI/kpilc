@@ -1,0 +1,18 @@
+/* input placeholder styling in different browsers */
+@mixin input-placeholder($color, $font-weight: 400) {
+  &::-webkit-input-placeholder {
+    color: $color;
+    font-weight: $font-weight;
+  }
+
+  &::-moz-placeholder {
+    color: $color;
+    opacity: 1;
+    font-weight: $font-weight;
+  }
+
+  &:-ms-input-placeholder {
+    color: $color;
+    font-weight: $font-weight;
+  }
+}

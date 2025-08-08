@@ -1,0 +1,138 @@
+<form [formGroup]="form">
+
+  <fieldset *ngIf="criteriaShown" class="border p-2" id="Fieldset">
+    <legend class="float-none w-auto p-2">
+      <span translate="nav.criteria" [translateParams]="{default: 'Criteria'}" style="font-family: 'Raleway-Bold', sans-serif;">
+      </span>
+    </legend>
+    <app-criteria *ngFor="let criteria of criterias" [criteria]="criteria" (criteriaValueChange)="countrychange($event)"
+      [form]="form" style="font-family: 'Raleway-SemiBold', sans-serif;">
+    </app-criteria>
+    <div id="buttonDisplay">
+      <button mat-raised-button id="buttoncssdisplay" (click)="showMyGrid()" *ngIf="showParams"><span
+          translate="Show other params" [translateParams]="{default: 'Show other params'}"></span></button>
+    </div>
+  </fieldset>
+
+  <div *ngIf="showGrid" class="main-content">
+    <div id="hidebutton">
+      <button mat-raised-button id="buttoncssdisplay" (click)="hideMyGrid()" *ngIf="hideParams"><span
+          translate="Hide other params" [translateParams]="{default: 'Hide other params'}"></span></button>
+    </div>
+    <!-- <input type="button" value="Hide other params" (click)="hideMyGrid()" *ngIf="hideParams"> -->
+    <app-ngx-table-wrapper [rows]="tableRows | filter:search | paginate : pagingConfig" [columnsConfig]="tableColumns"
+      [colMinWidth]="colMinWidth" [colHeaderTranslateKeyPrefix]="colHeaderTranslateKeyPrefix" [totalRows]="totalRows"
+      [actionColFrozen]="true" (pageSortEvent)="onPageSort($event)" [showPagination]="false" [selectionType]="selection"
+      [selectedRow]="selectedSession">
+
+    </app-ngx-table-wrapper>
+    <div class="d-flex justify-content-center">
+      <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
+    </div>
+  </div>
+
+  <mat-card #reportCard>
+    <mat-card-header>
+      <mat-toolbar>
+        <span>
+          <div>
+            <mat-icon class="arrow" *ngIf="criteriaShown" (click)="displayCiteria();" style="font-family: 'Material Icons' !important;">arrow_left</mat-icon>
+            <mat-icon class="arrow" *ngIf="!criteriaShown" (click)="displayCiteria();" style="font-family: 'Material Icons' !important;
+">arrow_right</mat-icon>
+          </div>
+        </span>
+        <span>
+          <span *ngIf="report" style="font-family: 'Raleway-Bold', sans-serif;">{{report.label | translate }}</span>
+
+        </span>
+        <span class="example-spacer"></span>
+        <div align="end">
+          <div *ngIf="form">
+            <!-- <button type="button"  mat-flat-button type="submit" (click)="onSubmit();" [disabled]="!form.valid"><mat-icon>cached</mat-icon></button> -->
+            <!-- <button type="button" [matMenuTriggerFor]="menu" mat-flat-button [disabled]="!form.valid"><mat-icon>get_app</mat-icon></button> -->
+            <button mat-raised-button id="buttoncssdisplay" (click)="criteriaValueChanged($event)">
+              <span translate="Display" [translateParams]="{default: 'Display'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+            </button>
+
+            <button style="width:auto" class="alignright" mat-raised-button (click)="export('ExcelOpenXML');">
+              <i style="margin-left: 3px;" class="fa fa-file-excel-o" aria-hidden="true"></i>
+              <span translate="Tablefooter.Export" style="margin-left: 6px; font-family: 'Raleway-SemiBold', sans-serif;"
+                [translateParams]="{default: 'Export'}"></span></button>
+
+
+            <button type="button" (click)="openFullscreen()" mat-flat-button><mat-icon>{{ isFullscreen ?
+                'fullscreen_exit' : 'fullscreen'}}</mat-icon></button>
+          </div>
+          <!-- <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="export('ExcelOpenXML');">
+                <span>Excel</span>
+              </button>
+              <button mat-menu-item (click)="export('pdf');">
+                <span>PDF</span>
+              </button>
+            </mat-menu> -->
+
+        </div>
+      </mat-toolbar>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- new code -->
+      <!-- <apx-chart [series]="series" [chart]="chart"></apx-chart> -->
+
+      <mat-tab-group *ngIf="report && report.subreports && report.subreports.length > 0"
+        (selectedIndexChange)="refresh($event);">
+        <mat-tab *ngFor="let rpt of report.subreports" label="{{ rpt.label | translate }}" style="font-family: 'Raleway-SemiBold', sans-serif;">
+          
+        </mat-tab>
+      </mat-tab-group>
+      <div *ngIf="showChart">
+        <canvas id="myChart"></canvas>
+      </div>
+      <div *ngIf="showSummry" id="showsummris">
+        <p style="text-align: center;">Monthly summary : groups per platforms</p>
+      </div>
+      <app-report-viewer *ngIf="displayedReport && showAppReportViewer == true"
+        [reportserver]="displayedReport.reportServer" [reporturl]="displayedReport.reportPath"
+        [report]="displayedReport" [parameters]="parameters" [language]="language" [height]="height">
+      </app-report-viewer>
+    </mat-card-content>
+  </mat-card>
+
+</form>
+<div Style="height: 14px;"></div>
+
+
+
+<!-- Dimmer background to cover the screen -->
+<div id="dimmer" class="dimmer"></div>
+
+<!-- The spinner -->
+<div class="spinner"><img src="assets/img/loader.gif" width="400"></div>
+
+
+<div class="version-info-bar" *ngIf="setparam==true" [style.textAlign]="'right'" [style.paddingRight]="'20px'">
+  <p class="alignleft"> <span translate="Tablefooter.Last"
+      [translateParams]="{default: 'Last data update : '}"></span><span style="text-indent: 50px;">{{kpilcdate | date:
+      'EEEE, MMMM d, y, h:mm:ss a': '' : translate.currentLang}}</span></p>
+
+  <!-- <button style="width:auto" class="alignright" mat-raised-button (click)="export('ExcelOpenXML');">
+    <i style="margin-left: 0px;" class="fa fa-file-excel-o" aria-hidden="true"></i>
+    <span style="margin-left: 6px;" translate="Tablefooter.Export"
+      [translateParams]="{default: 'Export'}"></span></button> -->
+  <div style="clear: both;"></div>
+</div>
+<div class="version-info-bar" *ngIf="setparam==false" [style.textAlign]="'right'" [style.paddingRight]="'20px'">
+  <p class="alignleft"><span translate="Tablefooter.Last" [translateParams]="{default: 'Last data update : '}"></span>
+    <span style="text-indent: 50px;">{{updateinfo | date: 'EEEE, MMMM d, y, h:mm:ss a': '' :
+      translate.currentLang}}</span>
+  </p>
+
+  <!-- <button style="width:auto" class="alignright" mat-raised-button (click)="export('ExcelOpenXML');">
+    <i style="margin-left: 3px;" class="fa fa-file-excel-o" aria-hidden="true"></i>
+    <span translate="Tablefooter.Export" style="margin-left: 6px;"
+      [translateParams]="{default: 'Export'}"></span></button> -->
+  <div style="clear: both;"></div>
+</div>
+
+<div Style="height: 14px;"></div>

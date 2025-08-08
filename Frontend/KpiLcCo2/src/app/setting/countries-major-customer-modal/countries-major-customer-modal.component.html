@@ -1,0 +1,50 @@
+<!-- user add/edit modal -->
+<form [formGroup]="userForm" autocomplete="off" #formRef="ngForm" [ngClass]="{'ng-form-submitted': formRef.submitted}"
+  (ngSubmit)="onSubmit()">
+  <div class="modal-header" [translate]="headerTitle.key" [translateParams]="{default: headerTitle.defaultText}" style="font-family: 'Raleway-SemiBold', sans-serif;"></div>
+  <div class="modal-body has-form">
+    <div class="error-message" *ngIf="saveError">{{saveError}}</div> 
+   
+
+    <div class="form-input-container is-required" *ngIf="selectedId.value!=null">
+      <div class="label" translate="formFieldLabels.code" [translateParams]="{default: 'Code'}"></div>
+      <div class="form-input-wrapper">
+        <input type="text" name="code" class="form-input" readonly="true"
+          placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..." formControlName="code"
+          maxlength="250" />
+      </div>
+    </div>
+
+    <div class="form-input-container is-required" *ngIf="selectedId.value!=null">
+      <div class="label" translate="formFieldLabels.name" [translateParams]="{default: 'Name'}"></div>
+      <div class="form-input-wrapper">
+        <input type="text" name="name" class="form-input" readonly="true"
+          placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..." formControlName="name"
+          maxlength="250" />
+      </div>
+    </div>
+   
+    <div class="form-input-container">
+      Enabled
+      <mat-checkbox [checked]="enabledForMajorCustomerReport" (change)="setAll($event.checked)" formControlName="enabledForMajorCustomerReport">
+      </mat-checkbox>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+   
+    <button type="submit" class="btn btn-primary is-big" ngbAutofocus>
+      <span class="with-icon">
+        <img class="icon" [src]="'assets/icons/check.svg'" />
+        <span translate="buttons.save" [translateParams]="{default: 'Save'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+      </span>
+    </button>
+
+    <button type="button" class="btn btn-cancel is-big" (click)="activeModal.close('cancel')">
+      <span class="with-icon">
+        <img class="icon" [src]="'assets/icons/close.svg'" />
+        <span translate="buttons.cancel" [translateParams]="{default: 'Cancel'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+      </span>
+    </button>
+  </div>
+</form>

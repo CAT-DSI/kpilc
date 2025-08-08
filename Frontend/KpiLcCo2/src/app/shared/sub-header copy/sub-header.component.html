@@ -1,0 +1,16 @@
+<!-- just below header, with breadcrumbs, filters, other content -->
+<div class="sub-header">
+  <div class="breadcrumbs">
+    <span
+      *ngFor="let crumb of breadcrumbs; first as isFirst"
+      class="item">
+      <span *ngIf="!isFirst" class="sep">&#62;</span>
+      <span *ngIf="crumb.key" [translate]="crumb.key" [translateParams]="{default: crumb.defaultText}"></span>
+      <span *ngIf="crumb.category" appCorporateCodes [ccCategory]="crumb.category" [ccCode]="crumb.code"></span>
+    </span>
+  </div>
+
+  <app-session-filter *ngIf="hasSessionFilter"></app-session-filter>
+
+  <ng-content></ng-content>
+</div>

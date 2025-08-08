@@ -1,0 +1,63 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form" class="form">
+    <div fxLayout="row" class="main-container"  fxLauoutAlign='space-between center'>
+      
+      <mat-card class="criterias" *ngIf="criteriaShown">
+        <mat-card-header class="input-form-header">
+            <mat-card-title>Criterias</mat-card-title>
+            <!-- <mat-card-subtitle>Select criteria then click display</mat-card-subtitle> -->
+        </mat-card-header>
+        <mat-card-content *ngIf="form" class="input-form-content">
+          <!-- <app-criteria-holder [criterias]="criterias$ | async"></app-criteria-holder> -->
+          <app-criteria  *ngFor="let criteria of criterias" [criteria]="criteria" (criteriaValueChange)="criteriaValueChanged($event)" [form]="form"></app-criteria>
+        </mat-card-content>
+      </mat-card>
+      
+      <mat-card class="report" #reportCard>
+        <mat-card-header class="reportcard-header">
+          <mat-toolbar class="reportviewer-header">
+            <span>
+              <div fxLayout="column" fxLauoutAlign='space-between center'>
+                <mat-icon class="arrow"  *ngIf="criteriaShown" (click)="displayCiteria();">arrow_left</mat-icon>
+                <mat-icon class="arrow" *ngIf="!criteriaShown" (click)="displayCiteria();">arrow_right</mat-icon>
+              </div>
+            </span>
+            <span>
+              <span *ngIf="report">{{report.label}}</span>
+            </span>
+            <span class="example-spacer"></span>
+            <div align="end">
+              <div fxLayout="row"  fxLayoutGap='15px' *ngIf="form">
+                <!-- <button type="button"  mat-flat-button type="submit" (click)="onSubmit();" [disabled]="!form.valid"><mat-icon>cached</mat-icon></button> -->
+                <button type="button" [matMenuTriggerFor]="menu" mat-flat-button [disabled]="!form.valid"><mat-icon>get_app</mat-icon></button>
+                <button type="button" (click)="openFullscreen()" mat-flat-button ><mat-icon>{{ isFullscreen ? 'fullscreen_exit' : 'fullscreen'}}</mat-icon></button>
+              </div>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="export('ExcelOpenXML');">
+                    <span>Excel</span>
+                  </button>
+                  <button mat-menu-item (click)="export('pdf');">
+                    <span>PDF</span>
+                  </button>
+                </mat-menu>
+            </div> 
+        </mat-toolbar>
+        </mat-card-header>
+        <mat-card-content class="input-form-content">
+        <mat-tab-group *ngIf="report && report.subreports && report.subreports.length > 0" 
+          (selectedIndexChange)="refresh($event);">
+          <mat-tab *ngFor="let rpt of report.subreports" [label]="rpt.label"> 
+            </mat-tab>
+          </mat-tab-group>
+          <app-report-viewer-kpilc *ngIf="displayedReport"
+          [reportserver]="displayedReport.reportServer"
+          [reporturl]="displayedReport.reportPath"
+          [report]="displayedReport"
+          [parameters]="parameters" 
+          [language]="language"
+          [height]="height">
+          </app-report-viewer-kpilc>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    </form>
+    

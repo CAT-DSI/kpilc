@@ -1,0 +1,63 @@
+// common/default angular bootstrap modal styles
+
+.modal-backdrop.show {
+  opacity: 0.2;
+}
+
+.modal-dialog {
+  // default modal width is 400px
+  width: 400px;
+  
+  .modal-content {
+    border: 0;
+    border-radius: 10px;
+    box-shadow: $card-shadow;
+  }
+
+  .modal-header {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 600;
+    padding: 17px 20px;
+    border: 0;
+    border-radius: 10px 10px 0 0;
+    text-transform: capitalize;
+  }
+
+  .modal-body {
+    background-color: rgba($gray-300, 0.3);
+    padding: 30px 20px;
+
+    &.has-form {
+      position: relative;
+      padding-top: 42px;
+
+      .error-message {
+        line-height: 16px;
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        right: 20px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+
+  // this just assumes that there are just buttons in the modal footer
+  .modal-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    border: 0;
+    border-radius: 0 0 10px 10px;
+
+    .btn {
+      min-width: 120px;
+      margin: 0 5px;
+    }
+  }
+}

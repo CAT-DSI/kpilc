@@ -1,0 +1,17 @@
+.form-input-container {
+   
+    width: calc(50% - 20px);
+  }
+
+  .label{
+    font-family: 'Raleway-Bold', sans-serif;
+  }
+  .ngx-pagination .ng-star-inserted {
+    font-family: 'Raleway-SemiBold', sans-serif;
+  }
+  
+  /* Apply font-family for the "Prev" and "Next" buttons */
+  .ngx-pagination .pagination-previous,
+  .ngx-pagination .pagination-next {
+    font-family: 'Raleway-Bold', sans-serif;
+  }

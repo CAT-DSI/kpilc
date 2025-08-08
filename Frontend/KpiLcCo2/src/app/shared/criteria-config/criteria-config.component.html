@@ -1,0 +1,68 @@
+<div *ngIf="form" [formGroup]="form" class="criteria-config-line" fxLayout="row wrap"  fxLayoutGap='15px'>
+ <!--<strong> {{crit.name}}</strong>
+    <span> with </span> -->
+    <input type="hidden" asp-for="timestamp" value="form.controls.timestamp.value" />
+    <input type="hidden" formControlName="id" value="form.controls.id.value"/>
+    <input formControlName="name"  type="hidden"/>
+    <input formControlName="reportID"  type="hidden"/>
+    <input formControlName="dataType"  type="hidden"/>
+    <mat-form-field appearance="legacy" [style.width.px]="60">
+      <mat-label>Order</mat-label>
+      <input matInput type="number" placeholder="label" formControlName="order"
+      [value]="form.controls.order.value">
+    </mat-form-field>
+    <mat-form-field appearance="fill" [style.width.%]="20">
+        <mat-label>Label</mat-label>
+        <input matInput placeholder="label" formControlName="label"
+        [value]="form.controls.label.value">
+      </mat-form-field>
+    <mat-form-field appearance="fill" [style.width.%]="20">
+         <mat-label>Type</mat-label>
+        <mat-select #Type formControlName="controlType"
+        [value]="form.controls.controlType.value">
+        <!--[compareWith]="attributeDisplay">--> 
+          <mat-option *ngFor="let type of _controlTypes" [value]="type.value">{{type.text}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="Type.value == 3" appearance="fill" [style.width.%]="20">
+        <mat-label>Referential</mat-label>
+        <mat-select formControlName="referential"
+        [value]="form.controls.referential.value"> 
+          <mat-option *ngFor="let item of referentials" [value]="item.id">{{item.label}}</mat-option>
+          <!-- <mat-option *ngFor="let ref of referentials" [value]="ref.id">{{ref.name}}</mat-option> -->
+        </mat-select>
+      </mat-form-field>
+      <!-- *ngIf="Type.value == 'List'" -->
+      <!-- <mat-form-field appearance="fill" [style.width.%]="30">
+        <mat-label>Criteria</mat-label> 
+        <mat-select #Dependence [value]="'None'" > 
+          <mat-option value="None">None</mat-option>
+          <mat-option value="product">product</mat-option>
+          <mat-option value="marque">marque</mat-option>
+          <mat-option value="brand">brand</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" [style.width.%]="30">
+        <mat-label>Column</mat-label> 
+        <mat-select #Dependence [value]="'None'" > 
+          <mat-option value="None">None</mat-option>
+          <mat-option value="product">product</mat-option>
+          <mat-option value="marque">marque</mat-option>
+          <mat-option value="brand">brand</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" [style.width.%]="30">
+        <mat-label>Columns</mat-label> 
+        <mat-select #Dependence [value]="'None'" > 
+          <mat-option value="None">None</mat-option>
+          <mat-option value="product">product</mat-option>
+          <mat-option value="marque">marque</mat-option>
+          <mat-option value="brand">brand</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+      <mat-slide-toggle color="primary" formControlName="required"
+       [checked]="form.controls.required.value"> Required </mat-slide-toggle>
+
+       <mat-slide-toggle *ngIf="Type.value == 3" color="primary" formControlName="multiple"
+       [checked]="form.controls.multiple.value"> Select Multiple </mat-slide-toggle>
+</div>

@@ -1,0 +1,86 @@
+<!-- user add/edit modal -->
+<form [formGroup]="userForm" autocomplete="off" #formRef="ngForm" [ngClass]="{'ng-form-submitted': formRef.submitted}"
+    (ngSubmit)="onSubmit()">
+    <div class="modal-header" [translate]="headerTitle.key" 
+    [translateParams]="{default: headerTitle.defaultText}" style="font-family: 'Raleway-SemiBold', sans-serif;">
+    </div>
+    <div class="modal-body has-form">
+        <div class="error-message" *ngIf="saveError">{{saveError}}</div>
+
+        <div class="form-input-container" *ngIf="selectedId.value!=null">
+            <div class="label" translate="formFieldLabels.country" [translateParams]="{default: 'Country'}"></div>
+            <div class="form-input-wrapper">
+              <input type="text" name="country" class="form-input" readonly="true"
+                placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..." formControlName="country"
+                maxlength="250" />
+            </div>
+          </div>
+          <div class="form-input-container" *ngIf="selectedId.value!=null">
+            <div class="label" translate="formFieldLabels.codePlf" [translateParams]="{default: 'CodePlf'}"></div>
+            <div class="form-input-wrapper">
+              <input type="text" name="codePlf" class="form-input" readonly="true"
+                placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..." formControlName="codePlf"
+                maxlength="250" />
+            </div>
+          </div>
+         <div class="form-input-container" *ngIf="selectedId.value!=null">
+      <div class="label" translate="formFieldLabels.Platform" [translateParams]="{default: 'PlateForm'}"></div>
+      <div class="form-input-wrapper">
+        <input type="text" name="plateform" class="form-input" readonly="true"
+          placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..." formControlName="plateform"
+          maxlength="250" />
+      </div>
+    </div>
+    <div class="form-input-container" *ngIf="selectedId.value!=null">
+        <div class="label" translate="formFieldLabels.nbr" [translateParams]="{default: 'Nbr'}"></div>
+        <div class="form-input-wrapper">
+          <input type="text" name="nbr" class="form-input" 
+            placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..." formControlName="nbr"
+            maxlength="100" />
+        </div>
+      </div>
+      <div class="form-input-container">
+        <div class="label" translate="formFieldLabels.euro" [translateParams]="{default: 'Euro'}"></div>
+        <div class="form-input-wrapper">
+          <input type="text" name="euro" class="form-input"
+            placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..." formControlName="euro"
+            maxlength="250" />
+        </div>
+      </div>
+      <div class="form-input-container" style="font-family: 'Raleway-Bold', sans-serif;">
+        IsCat
+        <mat-checkbox 
+        [checked]="isCat"
+        (change)="setAll($event.checked)">
+  
+  </mat-checkbox>
+     </div>
+     <div class="form-input-container" style="font-family: 'Raleway-Bold', sans-serif;">
+        Display
+        <mat-checkbox 
+        [checked]="display"
+        (change)="setAllDisplay($event.checked)">
+  
+  </mat-checkbox>
+     </div>
+    </div>
+
+    <div class="modal-footer">
+       
+        <button type="submit" class="btn btn-primary is-big" ngbAutofocus>
+            <span class="with-icon">
+                <!-- <span class="icon" inlineSVG="assets/icons/check.svg"></span> -->
+                <img class="icon" [src]="'assets/icons/check.svg'" />
+                <span translate="buttons.save" [translateParams]="{default: 'Save'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+            </span>
+        </button>
+
+        <button type="button" class="btn btn-cancel is-big" (click)="activeModal.close('cancel')">
+          <span class="with-icon">
+              <!-- <span class="icon" inlineSVG="assets/icons/close.svg"></span> -->
+              <img class="icon" [src]="'assets/icons/close.svg'" />
+              <span translate="buttons.cancel" [translateParams]="{default: 'Cancel'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+          </span>
+      </button>
+    </div>
+</form>

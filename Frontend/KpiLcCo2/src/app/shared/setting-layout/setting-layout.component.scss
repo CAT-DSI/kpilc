@@ -1,0 +1,68 @@
+.mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
+    border-radius: 0px !important;
+    background: transparent;
+    color:white;
+}
+
+.search {
+    margin-right:14px;
+}
+
+mat-form-field {
+    width: 600px;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.header {
+   height:7vh;
+   background: #2a699f;
+}
+
+.active {
+ background:#fafafa;
+ color:#000;
+}
+
+.container {
+    height:88vh;
+
+}
+
+.mat-sidenav-content{
+    margin: 3vh;
+}
+
+.mat-icon {
+    font-size: 20px;
+  }
+
+.mat-search_icons.mat-search_icon-close, .mat-search_icons.mat-search_icon-search
+{
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a.active:hover {
+    color:  #000;
+}
+
+a:hover, a:active{
+    color: lightgray;
+}
+.navigation-items{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.subnav {
+    background: #000;
+    height: 5vh;
+}

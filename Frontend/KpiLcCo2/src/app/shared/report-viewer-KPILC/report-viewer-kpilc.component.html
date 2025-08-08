@@ -1,0 +1,18 @@
+<!-- <iframe #reportingviewer (load)="loaded();"
+  scrolling="no" class="report-viewer" frameborder="0"
+[src]="url"></iframe> -->
+
+<form ngNoForm #form
+ [action]="url"
+ method="POST"
+ target="frame">
+<INPUT type="hidden" name="rs:Command" value="Render">   
+  <INPUT type="hidden" name="rs:ClearSession" value="true">   
+  <INPUT type="hidden" name="rc:LinkTarget" value="main">    
+  <INPUT type="hidden" name="rs:Format" value="HTML5.0">  
+  <input type="hidden"  name="rc:Parameters" value="false" />
+  <INPUT type="hidden" *ngFor="let param of parameters" [name]="param.key" [value]="param.value">
+</form>
+
+<iframe #reportingviewer (load)="loaded();" name="frame" class="report-viewer" 
+ frameborder="0" scrolling="no" [style.height]="height"></iframe>

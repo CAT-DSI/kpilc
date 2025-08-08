@@ -1,0 +1,30 @@
+// bootstrap dropdown, common styles
+.dropdown,
+.dropup {
+
+  .dropdown-toggle {
+    cursor: pointer;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  .dropdown-menu {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: 400;
+    border-radius: 0;
+    background-color: $white;
+    box-shadow: 7.1px 7.1px 9.9px 0.1px rgba(0, 0, 0, 0.2);
+
+    .dropdown-item {
+      cursor: pointer;
+
+      &:active {
+        background-color: transparent;
+      }
+    }
+  }
+}

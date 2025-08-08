@@ -1,0 +1,53 @@
+@import "variables";
+
+.checkbox {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+
+  &.is-disabled {
+    cursor: default;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  input[type=checkbox] {
+    display: none;
+  }
+  
+  .checkbox-label {
+    flex-shrink: 1;
+    color: $color-text-secondary;
+    margin-left: 10px;
+  }
+
+  .icon-checkbox {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    border: 1px solid $color-theme-primary;
+
+    .check {
+      opacity: 0;
+
+      ::ng-deep svg {
+        width: 9px;
+        height: 7px;
+      }
+    }
+  }
+
+  input[type=checkbox]:checked + .icon-checkbox {
+    border: 0;
+    background-color: $color-theme-primary;
+
+    .check {
+      opacity: 1;
+    }
+  }
+}

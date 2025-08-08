@@ -1,0 +1,50 @@
+.mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
+    border-radius: 0px !important;
+    background: transparent;
+    color:white;
+}
+
+.search {
+    margin-right:14px;
+}
+
+.alignleft {
+	float: left;
+    color:grey;
+}
+.alignright {
+	float: right;
+    color:grey;
+}
+
+mat-form-field {
+    width: 600px;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.header {
+   height:7vh;
+   background: #2a699f;
+}
+
+.container {
+    height:93vh;
+
+}
+
+.mat-sidenav-content{
+    margin: 3vh;
+    overflow: hidden;
+}
+
+.mat-icon {
+    font-size: 20px;
+  }
+
+.mat-search_icons.mat-search_icon-close, .mat-search_icons.mat-search_icon-search
+{
+    font-size: 20px;
+}

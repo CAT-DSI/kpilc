@@ -1,0 +1,21 @@
+<div class="body">
+		<div class="grad">
+		<div class="header">
+			<div>Groupe<span> CAT</span></div>
+		</div>
+		<br>
+		<div class="login">
+      <form [formGroup]="form" (ngSubmit)="submit();">
+      <div fxLayout="column wrap" fxLauoutAlign='space-between center' fxLayoutGap='10px'>
+        <input type="text" formControlName="login" placeholder="login" name="user" style="width:100%" required>
+        <input type="password" formControlName="password" placeholder="password" name="password"  style="width:100%" required>
+        <div align="end"><button type="submit"mat-flat-button style="width:100%">Login</button></div>
+        <div class="error">{{error}}</div>
+        <div style="text-align:right; color:aliceblue">
+          <a mat-button [routerLink]="['/initpass']" target="_self">Forgot password ?</a>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>

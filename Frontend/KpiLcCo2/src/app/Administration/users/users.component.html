@@ -1,0 +1,135 @@
+  <!-- users configuration page -->
+  <app-sub-header
+  [breadcrumbs]="breadcrumbs"
+>
+  <!-- <app-search-box
+    class="search-box"
+    [(ngModel)]="search"
+  ></app-search-box> -->
+  <div class="search-box" style=" height: 100%;
+  min-height: 30px;
+  width: 250px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #e7e7e7;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;">
+    <input
+      type="text"
+      placeholder="{{ 'placeholders.search' | translate: { default: 'Search'} }}"
+      [(ngModel)]="search" (change)="saverange()"
+      style="font-family: 'Raleway-SemiBold', sans-serif;"
+    />
+    <!-- <span
+      class="icon" style="margin-left: 12%;"
+      inlineSVG="assets/icons/search.svg"
+    ></span> -->
+    <img  class="icon" style="margin-left: 12%;" [src]="'assets/icons/search.svg'"  />
+  </div>
+
+  <!-- <div class="search-hero">
+    <input class="form-control" type="text" name="search" [(ngModel)]="search" autocomplete="off" placeholder="&#61442;  Start searching for a hero by id or name or country">
+  </div> -->
+  
+
+  <div class="btns-group">
+    <button class="btn btn-primary" (click)="addUser()">
+      <span class="with-icon">
+        <!-- <span class="icon" inlineSVG="assets/icons/add-new.svg"></span> -->
+        <img class="icon"  [src]="'assets/icons/add-new.svg'"  />
+        <span style="font-family: 'Raleway-SemiBold', sans-serif;">{{ 'buttons.addNew' | translate: { default: 'Add New' } }}</span>
+      </span>
+    </button>
+  </div>
+</app-sub-header>
+
+<div class="main-content">
+  <!-- <pre >{{tableRows.length | json }}</pre> -->
+  <app-ngx-table-wrapper
+    
+    [rows]="tableRows | filter:search | paginate : pagingConfig"
+   
+    [columnsConfig]="tableColumns"
+    [colMinWidth]="colMinWidth"    
+    [colHeaderTranslateKeyPrefix]="colHeaderTranslateKeyPrefix"
+    [totalRows]="totalRows"
+    [hasActionCol]="true"
+   
+   
+    (editRow)="editUser($event)"
+    (deleteRow)="deleteUser($event)"
+   
+    (pageSortEvent)="onPageSort($event)"
+  [showPagination]="false"
+    [selectionType]="selection"
+    [selectedRow]="selectedSession"
+    (selectRow)="onSelectSession($event)"
+  >
+ 
+</app-ngx-table-wrapper>
+<div class="d-flex justify-content-center mt-4">
+  <pagination-controls
+  previousLabel="Prev"
+  nextLabel="Next"
+  (pageChange)="onTableDataChange($event)">
+  </pagination-controls>
+</div>
+</div> 
+  
+ 
+<mat-card-content class="input-form-content">
+  <mat-tab-group>
+ 
+<mat-tab label="{{'Association des Pays' | translate}}" style="font-family: 'Raleway-Bold', sans-serif;">
+<div class="container-fluid">
+	<p></p>
+	<dual-list [sort]="keepSorted" [source]="source" [key]="key" [display]="display" [filter]="filter"
+  (selected)="onSelected($event)" [(destination)]="confirmed" height="265px" [format]="format" [disabled]="disabled"></dual-list>
+</div>
+</mat-tab>
+<mat-tab  label="{{'Platform' | translate}}" style="font-family: 'Raleway-Bold', sans-serif;">
+  <div class="container-fluid">
+    <p></p>
+    <dual-list [sort]="keepSorted" [source]="platform" [key]="keyplatform" [display]="displayplatform" [filter]="filter"
+      [(destination)]="platformconfirmed" height="265px" [format]="format" [disabled]="disabled"></dual-list>
+  </div>
+  </mat-tab>
+</mat-tab-group>
+</mat-card-content> 
+<div style="margin: 20px 10px 20px 0px;
+display: flex;
+padding-left: auto;
+margin-left: auto;
+align-items: center;
+justify-content: flex-end;
+max-width: 500px;">
+<button style="     background-color: #00518f;
+outline: none;
+box-shadow: none;
+width: 38%;
+display: inline-block !important;
+color: #ffffff !important;
+margin-top: -2%;
+margin: 20px 0;" class="btn btn-primary" id="buttoncssdisplay"  (click)="downloadFile()">
+  <span class="with-icon">
+    <!-- <span class="icon" inlineSVG="assets/icons/download.svg"></span> -->
+    <img class="icon"  [src]="'assets/icons/download.svg'"  />
+    <span>{{ 'buttons.downloadXlsx' | translate: { default: 'Export To Excel' } }}</span>
+  </span>
+</button>
+&nbsp; &nbsp; &nbsp;
+<button  style="background-color: #00518f;
+outline: none;
+box-shadow: none;
+width: 38%;
+display: inline-block !important;
+color: #ffffff !important;
+margin-top: 0%;" class="btn btn-primary" id="buttoncssdisplay" (click)="UpdateCountry()"  ngbAutofocus>
+  <span class="with-icon">
+    <!-- <span class="icon" inlineSVG="assets/icons/check.svg"></span> -->
+    <img class="icon"  [src]="'assets/icons/check.svg'"  />
+    <span translate="buttons.save" [translateParams]="{default: 'Save'}"></span>
+  </span>
+</button>
+</div>

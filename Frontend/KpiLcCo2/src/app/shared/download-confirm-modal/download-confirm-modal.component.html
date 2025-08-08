@@ -1,0 +1,27 @@
+<!-- download file confirmation modal -->
+<div class="modal-header" [translate]="headerTitle.key" [translateParams]="{default: headerTitle.defaultText}"></div>
+
+<div class="modal-body">
+  <div class="confirmation-text">
+    <div [translate]="confirmationTxt.key" [translateParams]="{default: confirmationTxt.defaultText}"></div>
+    <ng-container *ngIf="entityName">
+      <div class="entity-name is-ellipsis">{{entityName}}</div>
+    </ng-container>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary is-big" (click)="activeModal.close('confirm')">
+    <span class="with-icon">
+      <span translate="buttons.yes" [translateParams]="{default: 'YES'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+    </span>
+  </button>
+
+  <button class="btn btn-cancel is-big" [ngClass]="confirmBtnClass" (click)="activeModal.close('cancel')">
+    <span class="with-icon">
+      <!-- <span class="icon" [inlineSVG]="confirmBtnIconUrl"></span> -->
+      <!-- <img class="icon"  [src]="confirmBtnIconUrl"  /> -->
+      <span translate="buttons.cancel" [translateParams]="{default: 'Cancel'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+    </span>
+  </button>
+</div>

@@ -1,0 +1,231 @@
+<!-- <body> -->
+<app-sub-header [breadcrumbs]="breadcrumbs">
+</app-sub-header>
+<form [formGroup]="userForm" autocomplete="off" #formRef="ngForm" [ngClass]="{'ng-form-submitted': formRef.submitted}"
+    (ngSubmit)="onSubmit()">   
+    <div class="container">
+        <div *ngIf="message">
+            <div [ngClass]="[messageType]" class="message">
+              {{ message }}
+            </div>
+          </div>
+        <!-- Report Dropdown -->
+        <div class="form-section" id="reportSection" *ngIf="emailId != null">
+            <label class="form-label" for="reportSelect" translate="formFieldLabels.report"
+                [translateParams]="{default: 'Report'}" style="margin: 6px;"></label>
+            <span *ngIf="isFieldRequired('report')" class="required">*</span>
+            
+            <select id="reportSelect" formControlName="report" (change)="changeReport($event)">
+
+                <option *ngFor="let item of reportList" [value]="item.id">{{item.name}}</option>
+            </select>
+        </div>
+
+        <div class="form-section" id="reportSection" *ngIf="emailId == null">
+            <label class="form-label" for="reportSelect" translate="formFieldLabels.report"
+                [translateParams]="{default: 'Report'}" style="margin: 6px;"></label>
+            <span *ngIf="isFieldRequired('report')" class="required">*</span>
+            <select id="reportSelect" formControlName="report" (change)="changeReport($event)">
+
+                <option *ngFor="let item of reportList" [value]="item.id">{{item.name}}</option>
+            </select>
+        </div>
+
+        <span style="color: red; margin: 40%;"
+            *ngIf="userForm.get('report')?.invalid && userForm.get('report')?.touched">Report
+            is required</span>
+        <!-- section 1 reportName + -->
+
+        <div class="form-section">
+            <h2 *ngIf="emailId != null" style="font-family: 'Raleway-Bold', sans-serif;">{{userForm.get('reportsName')?.value + ' Parameters'}}</h2>
+            <h2 *ngIf="emailId == null && reportParameter != null" style="font-family: 'Raleway-Bold', sans-serif;">{{reportParameter + ' Parameters'}}</h2>
+            <table>
+                <tr>
+                    <td *ngIf="!hideRegime">
+                        <label class="label" for="regimeSelect" translate="formFieldLabels.regime"
+                            [translateParams]="{default: 'Regime'}"></label>
+
+                        <ng-multiselect-dropdown formControlName="selectedRegimes" [settings]="regimedropdownSettings"
+                            [data]="regimeList">
+                        </ng-multiselect-dropdown>
+                    </td>
+                    <td *ngIf="!hideCountry" >
+                        <div class="label" translate="formFieldLabels.country" [translateParams]="{default: 'Pays'}">
+                        </div>
+                        <select id="countrySelect" formControlName="selectedCountry" (change)="changeCountry($event)" [ngClass]="{'email-present': emailId != null}">
+                            <option *ngFor="let item of countryList" [value]="item.code">{{item.name}}</option>
+                        </select>
+                    </td>
+                    <td *ngIf="!hidePf">
+                        <div class="label" translate="formFieldLabels.pf" [translateParams]="{default: 'Pf'}">
+                        </div>
+                        <select id="pfSelect" formControlName="codePlf">
+                            <option *ngFor="let item of pflist" [value]="item.codePlf">{{item.codePlf}}</option>
+                        </select>
+                    </td>
+                    <td *ngIf="!hideMarque">
+
+                        <div class="label" translate="formFieldLabels.marque" [translateParams]="{default: 'Marque'}">
+                        </div>
+
+                        <select id="brandSelect" formControlName="selectedMarque" (change)="changeMarque($event)">
+                            <option *ngFor="let item of marquelist" [value]="item.brand">{{item.brand}}</option>
+                        </select>
+                    </td>
+                    <td *ngIf="!hideProduct">
+
+                        <div class="label" translate="formFieldLabels.product"
+                            [translateParams]="{default: 'Products'}">
+                        </div>
+                        <ng-multiselect-dropdown formControlName="selectedProducts" [settings]="productdropdownSettings"
+                            [data]="productoption">
+                        </ng-multiselect-dropdown>
+
+                    </td>
+                    <td *ngIf="!hideGroupe">
+                        <label translate="formFieldLabels.groupe" [translateParams]="{default: 'Groupe'}"></label>
+                        <ng-multiselect-dropdown formControlName="groupes" [settings]="dropdownSettings"
+                            [data]="groupesDropDownList" (onSelect)="onItemSelect($event)">
+                        </ng-multiselect-dropdown>
+
+                    </td>
+                    <td *ngIf="!hideETD1">
+                        <label for="etd1">ETD1</label>
+                        <select id="etdSelect" formControlName="sysdate">
+                            <option value="0">Current Month</option>
+                            <option value="1">Previous Month</option>
+                        </select>
+                    </td>
+
+                    <td *ngIf="!hideETD">
+                        <label for="etd">ETD1</label>
+                        <input type="text" id="etd" formControlName="sysdate" class="form-control"
+                            placeholder="Enter ETD">
+                    </td>
+
+                    <td *ngIf="!hideETD2">
+                        <label for="etd">ETD2</label>
+                        <input type="text" id="etd2" name="etd2" formControlName="sysdate1" class="form-control"
+                            placeholder="Enter ETD">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Section 2: Email configuration -->
+
+        <div class="form-section">
+            <h2 translate="formFieldLabels.Emailconfiguration"
+            [translateParams]="{default: 'Email configuration'}" style="font-family: 'Raleway-Bold', sans-serif;"></h2>
+            <table>
+                <tr>
+                    <td>
+                        <label class="form-label" translate="formFieldLabels.typeDeRecurrence"
+                        [translateParams]="{default: 'Type de récurrence'}"></label>
+                        <select id="recurrence">
+                            <option value="">Calendaire</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="label form-label" translate="formFieldLabels.frequencies"
+                            [translateParams]="{default: 'Frequencies'}">
+                            <span *ngIf="isFieldRequired('report')" class="required">*</span>
+                        </div>
+
+                        <ng-multiselect-dropdown formControlName="selectedFrequency"
+                            [settings]="frquencydropdownSettings" [data]="frequencyoption">
+                        </ng-multiselect-dropdown>
+
+                        <span style="color: red;"
+                        *ngIf="userForm.get('selectedFrequency')?.invalid && userForm.get('selectedFrequency')?.touched">Frequency
+                        is required</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label translate="formFieldLabels.Mois" [translateParams]="{default: 'Mois'}" style="font-family: 'Raleway-Bold', sans-serif;"></label></th>
+                    <th> <label translate="formFieldLabels.Jour" [translateParams]="{default: 'Jour'}" style="font-family: 'Raleway-Bold', sans-serif;"></label></th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" id="remoteYes" name="remote" formControlName="eachMonth" [value]="true"
+                            (change)="toggleMois()" >
+                        <label for="remoteYes" translate="formFieldLabels.Chaquemois" [translateParams]="{default: 'Chaque mois'}" class="form-label"></label>
+                    </td>
+                    <td>
+                        <input type="radio" id="remoteYes1" name="remote1" formControlName="eachDay" [value]="true" (change)="toggleTousLesJours()" >
+                        <label for="remoteYes1" translate="formFieldLabels.Touslesjours" [translateParams]="{default: 'Tous les jours'}" class="form-label"></label>
+                      </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" id="remoteNo" name="remote" formControlName="eachMonth" [value]="false"
+                            (change)="toggleMois()">
+                        <label for="remoteNo" translate="formFieldLabels.Moisselection" [translateParams]="{default: 'Mois sélectionnés'}" class="form-label"></label>
+
+                        <!-- Multiselect Dropdown for Months -->
+                        <ng-multiselect-dropdown *ngIf="userForm.value.eachMonth === false" formControlName="months"
+                            [settings]="dropdownSettings" [data]="monthsDropdownList" (onSelect)="onItemSelect($event)">
+                        </ng-multiselect-dropdown>
+                    </td>
+
+                    <td>
+                        <input type="radio" id="remoteNo1" name="remote1" formControlName="eachDay" [value]="false" (change)="toggleTousLesJours()">
+                        <label for="remoteNo1" translate="formFieldLabels.Joursselection" [translateParams]="{default: 'Jours sélectionnés'}" class="form-label"></label>
+                        <ng-multiselect-dropdown *ngIf="userForm.value.eachDay === false && userForm.value.isDateRange === false" formControlName="days"
+                                                 [settings]="dropdownSettings" [data]="daysDropDownList" (onSelect)="onItemSelect($event)">
+                        </ng-multiselect-dropdown>
+                      </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="radio" id="remoteDateRange" name="remote1" formControlName="isDateRange" [value]="true" (change)="toggleDateRange()">
+                        <label for="remoteDateRange" translate="formFieldLabels.Specificdays" [translateParams]="{default: 'Specific days in the month'}" class="form-label"></label>
+                        <input *ngIf="userForm.value.isDateRange === true" type="text" formControlName="datesRange">
+                      </td>
+                </tr> 
+
+            </table>
+        </div>
+
+        <!-- section 3 -->
+
+        <div class="form-section">
+            <table>
+                <tr>
+                    <td class="is-required">
+                        <label for="recipients" translate="formFieldLabels.Recipients" [translateParams]="{default: 'Recipients'}" class="form-label"></label>
+                         <span *ngIf="isFieldRequired('report')"
+                            class="required">*</span>
+                        <textarea id="email-details" name="email-details" formControlName="emails"
+                            placeholder="Enter Emails"></textarea>
+
+                        <span style="color: red;"
+                            *ngIf="userForm.get('emails')?.invalid && userForm.get('emails')?.touched">Recipients
+                            is required</span>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <!-- <div class="form-group">
+            <button type="submit" class="submit-btn">Submit</button>
+        </div> -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary is-big" ngbAutofocus style="margin-right: 10px;">
+                <span class="with-icon">
+                    <img class="icon" [src]="'assets/icons/check.svg'" />
+                    <span translate="buttons.save" [translateParams]="{default: 'Save'}" class="form-label"></span>
+                </span>
+            </button>
+            <button type="button" class="btn btn-cancel is-big" (click)="onCancel()">
+                <!-- (click)="activeModal.close('cancel')"> -->
+                <span class="with-icon">
+                    <img class="icon" [src]="'assets/icons/close.svg'" />
+                    <span translate="buttons.cancel" [translateParams]="{default: 'Cancel'}" class="form-label"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+</form>
+<!-- </body> -->

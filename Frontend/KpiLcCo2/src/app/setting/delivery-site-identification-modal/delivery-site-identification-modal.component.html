@@ -1,0 +1,98 @@
+<!-- user add/edit modal -->
+<form [formGroup]="userForm" autocomplete="off" #formRef="ngForm" [ngClass]="{'ng-form-submitted': formRef.submitted}"
+  (ngSubmit)="onSubmit()">
+  <div class="modal-header" [translate]="headerTitle.key" 
+  [translateParams]="{default: headerTitle.defaultText}" style="font-family: 'Raleway-SemiBold', sans-serif;"></div>
+ <div class="modal-body has-form">
+    <div class="error-message" *ngIf="saveError">{{saveError}}</div>
+
+    <div class="form-input-container is-required"  *ngIf="selectedId.value==null">
+      <div
+        class="label"
+        translate="formFieldLabels.country"
+        [translateParams]="{default: 'Country'}"
+      ></div>
+       
+      <div class="form-input-wrapper">
+      <select 
+      class="form-select" formControlName="country"   (change)="changeCountry($event)">
+      <option *ngFor="let item of countryList"    [ngValue]="item">{{item.name}}</option>
+      </select>
+      </div>
+      </div>
+      <div class="form-input-container is-required"  *ngIf="selectedId.value==null">
+        <div
+          class="label"
+          translate="formFieldLabels.brand"
+          [translateParams]="{default: 'Brand'}"
+        ></div>
+         
+        <div class="form-input-wrapper">
+        <select 
+        class="form-select" formControlName="brand"   >
+        <option *ngFor="let item of pflist"    [ngValue]="item">{{item.xaccountId}}</option>
+        </select>
+        </div>
+        </div>
+        <div class="form-input-container is-required"  *ngIf="selectedId.value==null">
+          <div
+            class="label"
+            translate="formFieldLabels.product"
+            [translateParams]="{default: 'Product'}"
+          ></div>
+           
+          <div class="form-input-wrapper">
+          <select 
+          class="form-select" formControlName="product"   >
+          <option *ngFor="let item of pflist"    [ngValue]="item">{{item.sprId}}</option>
+          </select>
+          </div>
+          </div>
+   
+    <div class="form-input-container is-required" *ngIf="selectedId.value!=null">
+      <div class="label" translate="formFieldLabels.country" [translateParams]="{default: 'Country'}"></div>
+      <div class="form-input-wrapper">
+        <input type="text" name="country" class="form-input" readonly="true"
+          placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..."
+          formControlName="country" maxlength="250" />
+      </div>
+    </div>
+
+    <div class="form-input-container is-required" *ngIf="selectedId.value!=null">
+      <div class="label" translate="formFieldLabels.brand" [translateParams]="{default: 'Brand'}"></div>
+      <div class="form-input-wrapper">
+        <input type="text" name="brand" class="form-input" readonly="true"
+          placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..."
+          formControlName="brand" maxlength="250" />
+      </div>
+    </div>
+
+    <div class="form-input-container is-required" *ngIf="selectedId.value!=null">
+      <div class="label" translate="formFieldLabels.product" [translateParams]="{default: 'Product'}"></div>
+      <div class="form-input-wrapper">
+        <input type="text" name="product" class="form-input" readonly="true"
+          placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..." formControlName="product"
+          maxlength="100" />
+      </div>
+    </div>
+       
+  </div>
+
+  <div class="modal-footer">
+   
+    <button type="submit" class="btn btn-primary is-big" ngbAutofocus>
+      <span class="with-icon">
+        <!-- <span class="icon" inlineSVG="assets/icons/check.svg"></span> -->
+        <img class="icon"  [src]="'assets/icons/check.svg'"  />
+        <span translate="buttons.save" [translateParams]="{default: 'Save'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+      </span>
+    </button>
+    <button type="button" class="btn btn-cancel is-big" (click)="activeModal.close('cancel')">
+      <span class="with-icon">
+        <!-- <span class="icon" inlineSVG="assets/icons/close.svg"></span> -->
+        <img class="icon"  [src]="'assets/icons/close.svg'"  />
+        <span translate="buttons.cancel" [translateParams]="{default: 'Cancel'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+      </span>
+    </button>  
+  </div>
+</form>

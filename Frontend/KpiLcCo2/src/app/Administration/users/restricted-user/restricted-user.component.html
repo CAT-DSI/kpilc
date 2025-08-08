@@ -1,0 +1,51 @@
+
+
+<mat-card-content class="input-form-content">
+    <mat-tab-group>
+   
+  <mat-tab label="Managemenet of UserReports">
+
+
+    <div class="container">
+        <div class="row">
+            <div class="Headerreport">
+        <span Style="font-size: 15px;"> Restrcited user</span>
+        <span Style="margin-left: 44%; font-size: 15px;">Users Report</span>
+          
+        <span Style="margin-left: 12%;  font-size: 15px;"> Avaialble Reports</span>
+        </div>
+        <div class="hr hr-16 hr-dotted"></div>
+        <div class="col-xs-6 col-sm-6">
+            <div class="main-content">
+                <app-ngx-table-wrapper
+                [rows]="tableRows"
+                [columnsConfig]="tableColumns"
+                [colMinWidth]="colMinWidth"
+                [colHeaderTranslateKeyPrefix]="colHeaderTranslateKeyPrefix"
+                [totalRows]="totalRows"    
+                [actionColFrozen]="true"  
+              ></app-ngx-table-wrapper>
+              <!-- [pageIndex]="basicParams?.pageIndex"
+              [pageSize]="basicParams?.pageSize" -->
+              </div>
+                
+            </div>
+         
+           
+            <div class="col-xs-6 col-sm-6">
+                <div class="container-fluid">
+                   
+                    
+                    <dual-list [sort]="keepSorted" [source]="source" [key]="key" [display]="display" [filter]="filter"
+                        [(destination)]="confirmed" height="465px" [format]="format" [disabled]="disabled"></dual-list>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+  
+  </mat-tab>
+  
+  </mat-tab-group>
+  </mat-card-content> 

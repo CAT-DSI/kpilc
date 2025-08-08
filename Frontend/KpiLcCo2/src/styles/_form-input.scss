@@ -1,0 +1,141 @@
+// common styles for form input
+
+// wrapped input wrappers for more functionality/features
+.form-input-container {
+  margin-bottom: 26px;
+
+  .label {
+    text-transform: capitalize;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  &.is-required {
+
+    .label:after {
+      content: " *";
+      color: $color-error;
+    }
+  }
+}
+
+
+// basic input box
+.form-input-wrapper {
+  height: $form-input-height;
+  display: flex;
+  background-color: $white;
+
+  // for input fields
+  .form-input {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    flex: 1;
+    font-size: 14px;
+    background-color: transparent;
+    padding: 0 12px;
+
+    &:disabled {
+      background-color: rgba($gray-300, 0.5);
+    }
+  }
+
+  // for custom select dropdown fields
+  .form-select {
+    width: 100%;
+    background-color: transparent;
+  }
+
+  // for input wrapper that has an icon like in login page
+  // border will be on it rather than the input
+  &.with-icon {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+
+    &.is-disabled {
+      pointer-events: none;
+      background-color: rgba($gray-300, 0.5);
+    }
+
+    .form-input {
+      border: 0;
+      border-radius: 0;
+    }
+
+    .icon {
+      align-self: center;
+      margin-left: 12px;
+
+      &.on-right {
+        margin: 0 12px 0 0;
+      }
+    }
+  }
+
+  // small form inputs
+  &.is-small {
+    height: $form-input-height-small;
+  }
+
+  &:not(.with-icon) {
+
+    // to show validation errors, if form is touched but still invalid
+    .form-input {
+
+      &.ng-invalid.ng-touched {
+        border-color: $color-error;
+      }
+    }
+
+    .form-select {
+
+      &.ng-invalid.ng-touched {
+
+        .dropdown-wrapper .dropdown-toggle {
+          border-color: $color-error;
+        }
+      }
+    }
+  }
+
+  &.with-icon {
+
+    &.ng-invalid.ng-touched {
+      border-color: $color-error;
+    }
+  }
+}
+
+// to show validation errors if the form has been submitted, even if form input is not touched yet
+.ng-form-submitted {
+
+  .form-input-wrapper {
+
+    &:not(.with-icon) {
+
+      .form-input {
+
+        &.ng-invalid {
+          border-color: $color-error;
+        }
+      }
+
+      .form-select {
+
+        &.ng-invalid {
+
+          .dropdown-wrapper .dropdown-toggle {
+            border-color: $color-error;
+          }
+        }
+      }
+    }
+
+    &.with-icon {
+
+      &.ng-invalid {
+        border-color: $color-error;
+      }
+    }
+  }
+}

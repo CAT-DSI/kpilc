@@ -1,0 +1,56 @@
+<form [formGroup]="userForm" autocomplete="off" #formRef="ngForm" [ngClass]="{'ng-form-submitted': formRef.submitted}"
+    (ngSubmit)="onSubmit()">
+    <div class="modal-header" [translate]="headerTitle.key" 
+    [translateParams]="{default: headerTitle.defaultText}" style="font-family: 'Raleway-SemiBold', sans-serif;">
+    </div>
+    <div class="modal-body has-form">
+        <div class="error-message" *ngIf="saveError">{{saveError}}</div>
+
+        <div class="form-input-container is-required" *ngIf="selectedId.value==null">
+            <div class="label" translate="formFieldLabels.family" [translateParams]="{default: 'Family'}"></div>
+
+            <div class="form-input-wrapper">
+                <select class="form-select" formControlName="family">
+                    <option *ngFor="let item of countryList" [ngValue]="item">{{item.regime}}</option>
+                </select>
+            </div>
+        </div>
+                
+       
+        <div class="form-input-container is-required" *ngIf="selectedId.value!=null">
+            <div class="label" translate="formFieldLabels.family" [translateParams]="{default: 'Family'}"></div>
+        <div class="form-input-wrapper">
+            <select 
+            class="form-select" formControlName="family">
+            <option [hidden]="true" disabled [selected]="selectedName!=null">{{selectedName}}</option>
+            <option *ngFor="let item of countryList"    [ngValue]="item">{{item.regime}}</option>
+            </select>
+            </div>
+            </div>
+
+        <div class="form-input-container">
+            <div class="label" translate="formFieldLabels.label" [translateParams]="{default: 'Label'}"></div>
+            <div class="form-input-wrapper">
+              <input type="text" name="label" class="form-input"
+                placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..." formControlName="label"
+                maxlength="250" />
+            </div>
+          </div>       
+        
+    </div>
+    <div class="modal-footer">
+       
+        <button type="submit" class="btn btn-primary is-big" ngbAutofocus>
+            <span class="with-icon">
+                <img class="icon" [src]="'assets/icons/check.svg'" />
+                <span translate="buttons.save" [translateParams]="{default: 'Save'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+            </span>
+        </button>
+        <button type="button" class="btn btn-cancel is-big" (click)="activeModal.close('cancel')">
+            <span class="with-icon">
+                <img class="icon" [src]="'assets/icons/close.svg'" />
+                <span translate="buttons.cancel" [translateParams]="{default: 'Cancel'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+            </span>
+        </button>
+    </div>
+</form>

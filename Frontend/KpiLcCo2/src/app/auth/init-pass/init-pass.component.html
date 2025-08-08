@@ -1,0 +1,23 @@
+<div class="body">
+    <div class="grad">
+    <div class="header">
+        <div>Groupe<span> CAT</span></div>
+    </div>
+    <br>
+    <div class="login">
+  <form  *ngIf="!token" [formGroup]="formSend" (ngSubmit)="submitSend();">
+  <div fxLayout="column wrap" fxLauoutAlign='space-between center' fxLayoutGap='10px'>
+    <input type="email" formControlName="email"  placeholder="email" name="email" style="width:100%" required>
+    <div align="end"><button type="submit"mat-flat-button style="width:100%">Send initialisation link</button></div>
+    <div class="error">{{error}}</div>
+  </div>
+</form>
+<form  *ngIf="token" [formGroup]="formInit" (ngSubmit)="submitInit();">
+  <div *ngIf="token"  fxLayout="column wrap" fxLauoutAlign='space-between center' fxLayoutGap='10px'>
+    <input type="password" formControlName="password" placeholder="new password" name="user" style="width:100%">
+    <div align="end"><button type="submit"mat-flat-button style="width:100%">Init password</button></div>
+  </div>
+</form>
+</div>
+</div>
+</div>

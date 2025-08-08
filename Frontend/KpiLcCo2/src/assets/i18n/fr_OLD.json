@@ -1,0 +1,291 @@
+{
+  "status": "Statut",
+  "from": "de",
+  "to": "à",
+  "itemsPerPage": "lignes par page",
+  "tableEmptyMessage": "Pas de données à afficher",
+  "statusTitles": {
+    "localIT": "Fichier LOCAL IT",
+    "physicalFile": "Fichier PHYSIQUE",
+    "centralValidation": "Validation Central"
+  },
+  "entities": {
+    "user": "utilisteur",
+    "session": "session",
+    "center": "centre",
+    "geoPole": "pôle géo",
+    "country": "pays",
+    "vin": "vin"
+  },
+  "nav": {
+    "cockpit": "cockpit",
+    "duplicates": "doublons",
+    "reports": "rapports",
+    "configuration": "configuration",
+    "user": "utlisateur",
+    "center": "centre",
+    "country": "pays",
+    "geoPole": "pôle géo",
+    "session": "session",
+    "wmiBrand": "Code Constructeur",
+    "externalReference": "Transco Tiers"
+  },
+  "placeholders": {
+    "typeHere": "écrivez ici",
+    "select": "sélectionner",
+    "search": "chercher"
+  },
+  "buttons": {
+    "login": "login",
+    "backLogin": "Retour",
+    "logout": "se déconnecter",
+    "uploadXlsx": "charger XLSX",
+    "downloadXlsx": "télecharger XLSX",
+    "downloadCsv": "télécharger CSV",
+    "exportXlsx": "exporter XLSX",
+    "exportCsv": "exporter CSV",
+    "addNew": "ajouter",
+    "upload": "charger",
+    "cancel": "annuler",
+    "save": "enregistrer",
+    "delete": "supprimer",
+    "edit": "modifier",
+    "send": "envoyer",
+    "reset": "initialiser",
+    "viewDetails": "voir détails",
+    "ok": "OK",
+    "submit": "enregistrer",
+    "close": "fermer"
+  },
+  "formFieldLabels": {
+    "user": "utlisateur",
+    "username": "login",
+    "password": "mot de passe",
+    "rePassword": "retaper mot de passe",
+    "status": "Statut",
+    "geoPoleName": "nom pôle geo",
+    "countryName": "nom pays",
+    "isoCode": "code iso",
+    "geoPole": "pôle géo",
+    "centerCode": "code centre",
+    "centerName": "nom centre",
+    "centerType": "Type centre",
+    "sessionName": "nom session",
+    "startDate": "date début",
+    "endDate": "date fin",
+    "login": "login",
+    "firstName": "prénom",
+    "lastName": "nom",
+    "role": "rôle",
+    "center": "centre",
+    "country": "pays",
+    "email": "mail",
+    "fixPhone": "téléphone fixe",
+    "cellPhone": "téléphone portable",
+    "inventoryDate": "Date d'Inventaire",
+    "localITSystem": "LOCAL IT"
+  },
+  "pageTitles": {
+    "login": "Authentification",
+    "forgotPass": "Mot de passe oublié",
+    "resetPass": "réinitialiser"
+  },
+  "loginPage": {
+    "rememberPassword": "Rester connecté",
+    "forgotPassword": "Mot de passe oublié ?"
+  },
+  "forgotPassPage": {
+    "message": "Le lien de réinitialisation du mot de passe sera envoyé à votre adresse mail",
+    "emailSent": "Un mail vous a été envoyé, veuillez suivre les instructions dans ce mail pour réinitialiser le mot de passe"
+  },
+  "resetPassPage": {
+    "confirmation": "Votre mot de passe a été réinitialisé avec succès.",
+    "mismatchError": "Les deux mots de passe doivent correspondre"
+  },
+  "cockpitTabs": {
+    "fileManagement": {
+      "centerTitle": "Gestion des fichiers",
+      "centralTitle": "Gest. Fichiers Central",
+      "loadCentralTitle": "Charger Fichier Central IT",
+      "loadTransportTitle": "Charger Fichier Tranpsort",
+      "loadLocalTitle": "Charger Fichier LOCAL IT",
+      "loadPhysicalTitle": "Charger Fichier Physique"
+    },
+    "statusManagement": {
+      "title": "Validation fichiers",
+      "columns": {
+        "regulationDate": "Date",
+        "user": "Utilisateur",
+        "vinNumber": "Nombre de VIN"
+      }
+    },
+    "itNoPhysicalTitle": "IT non Physique",
+    "physicalNoItTitle": "Physique non IT",
+    "fileErrorColumns": {
+      "vinCode": "VIN",
+      "pgeo": "Code Centre",
+      "correctionDate": "Date de Régularisation",
+      "correctionDescription": "Commentaires"
+    }
+  },
+  "duplicatesPage": {
+    "tabTitles": {
+      "local": "IT Local",
+      "physical": "Physique"
+    },
+    "columns": {
+      "vinCode": "VIN",
+      "pgeo": "Centre",
+      "inCentralIT": "Central IT",
+      "inPhysical": "Physique",
+      "inLocalIT": "Local IT"
+    }
+  },
+  "contactsTable": {
+    "title": "Contactez-nous",
+    "regionHead": "Responsable Région",
+    "columns": {
+      "name": "Nom",
+      "fixPhone": "Téléphone",
+      "email": "Mail"
+    }
+  },
+  "modals": {
+    "deleteConfirmationTxt": "Voulez vous supprimer",
+    "uploadTitle": "charger fichier",
+    "geoPole": {
+      "addTitle": "Ajouter un pôle géographique",
+      "editTitle": "Modifier un pôle géographique",
+      "deleteTitle": "Supprimer un pôle géographique"
+    },
+    "country": {
+      "addTitle": "Ajouter un pays",
+      "editTitle": "Modifier un pays",
+      "deleteTitle": "Supprimer un pays"
+    },
+    "center": {
+      "addTitle": "Ajouter centre",
+      "editTitle": "Modifier centre",
+      "deleteTitle": "Supprimer Centre"
+    },
+    "session": {
+      "addTitle": "Ajouter une session",
+      "editTitle": "Modifier une session",
+      "deleteTitle": "Supprimer une session"
+    },
+    "user": {
+      "addTitle": "Ajouter utlisateur",
+      "editTitle": "Modifier utilisateur",
+      "deleteTitle": "Supprimer utilsiateur"
+    },
+    "fileErrorDetails": {
+      "title": "Details des erreurs fichier",
+      "fields": {
+        "fileName": "Nom fichier",
+        "dateTime": "Date chargement",
+        "user": "Utilisateur",
+        "errors": "Erreurs"
+      }
+    },
+    "duplicateDelete": {
+      "title": "Supprimer doublons",
+      "entity": "le doublons"
+    },
+    "downloadConfirmation": {
+      "report": {
+        "title": "Exporter Rapprort",
+        "confirmationTxtXlsx": "Exporter en XLSX",
+        "confirmationTxtCsv": "Exporter en CSV"
+      },
+      "wmi": {
+        "title": "Télécharger WMI",
+        "confirmationTxt": "Télécharger WMI"
+      },
+      "rxr": {
+        "title": "Télecharger Transco Tiers",
+        "confirmationTxt": "Télécharger Trancos Tiers "
+      }
+    }
+  },
+  "fileUpload": {
+    "placeholder": {
+      "select": "Séléctionner le fichier à charger",
+      "or": "or",
+      "dragDrop": "Glisser & Déposer"
+    },
+    "successTxt": "Fichier chargé avec succès !",
+    "failureTxt": "Fichier non chargé!"
+  },
+  "commonColNames": {
+    "status": "Statut",
+    "action": "Action"
+  },
+  "sessionCenterColumns": {
+    "localSessionDate": "Date d'Inventaire",
+    "pgeo": "Code Centre",
+    "countryName": "Pays",
+    "localITNumber": "Nb VIN Local IT ",
+    "wkfLocalITStatus": "Ficher Local IT",
+    "localPhysicalNumber": "Nb VIN Physique",
+    "wkfLocalPhysicalStatus": "Fichier Physique",
+    "wkfCentralStatus": "Validation Central"
+  },
+  "userColumns": {
+    "login": "Login",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "roleId": "Rôle",
+    "pgeo": "Centre",
+    "countryName": "Pays",
+    "geoPoleName": "Pôle Géo",
+    "email": "Mail",
+    "fixPhone": "Téléphone Fixe",
+    "cellPhone": "Téléphone Portable"
+  },
+  "sessionColumns": {
+    "name": "Nom Session",
+    "startDate": "Date de Début",
+    "endDate": "Date De Fin",
+    "wkfStatus": "Statut"
+  },
+  "geoPoleColumns": {
+    "name": "Nom Pôle Géo"
+  },
+  "countryColumns": {
+    "name": "Nom Pays",
+    "codeISO": "Code ISO",
+    "geoPoleName": "Pôle Géo"
+  },
+  "centerColumns": {
+    "pgeo": "Code Centre",
+    "name": "Nom Centre",
+    "centerType": "Type Centre",
+    "countryName": "Nom Pays"
+  },
+  "wmiColumns": {
+    "codeWMI": "WMI Code",
+    "rapport": "Rapport",
+    "constructeur": "Constructeur",
+    "codeDonneurOrdre": "Donneur Code",
+    "libelleDonneurOrdre": "Donneur Libelle",
+    "codeMarque": "Marque Code",
+    "libelleDeLaMarque": "Marque Libelle",
+    "codeMarqueClv": "Marque CLV"
+  },
+  "extReferenceColumns": {
+    "valRefTiersTransco": "Val Ref Tiers",
+    "libCodTableRef": "Lib Cod Table Ref",
+    "libReferentiel": "Lib Referential",
+    "dteCreatTransco": "Date Created",
+    "dteModifTransco": "Date Modified",
+    "statTransco": "Stat Transco",
+    "valRefCatTransco": "Val Ref Cat",
+    "codRefTiersTransco": "Cod Ref Tiers",
+    "codTableTranscodee": "Cod Table Transcodee"
+  },
+  "secondaryTables": {
+    "centerUserTitle": "Liste des utilsateurs Centre",
+    "geoPoleCountryTitle" : "Liste des Pays",
+    "sessionCenterTitle": "Liste des Centres" 
+	  }
+}

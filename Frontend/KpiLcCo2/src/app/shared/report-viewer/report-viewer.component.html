@@ -1,0 +1,22 @@
+
+<head>
+  <meta http-Equiv="Cache-Control" Content="no-cache" />
+  <meta http-Equiv="Pragma" Content="no-cache" />
+  <meta http-Equiv="Expires" Content="0" />
+</head>
+
+<form ngNoForm #form
+ [action]="url"
+ method="POST"
+ target="frame">
+<INPUT type="hidden" name="rs:Command" value="Render">   
+  <INPUT type="hidden" name="rs:ClearSession" value="true">   
+  <INPUT type="hidden" name="rc:LinkTarget" value="main">    
+  <INPUT type="hidden" name="rs:Format" value="HTML5.0">  
+  <input type="hidden"  name="rc:Parameters" value="false" />
+  <INPUT type="hidden" *ngFor="let param of parameters" [name]="param.key" [value]="param.value">
+</form>
+
+<app-loader *ngIf="isLoading"></app-loader>
+<iframe #reportingviewer (load)="loaded();" name="frame" class="report-viewer"
+ frameborder="0" scrolling="no" [style.height]="height" id="reportIFrame" src=""></iframe>

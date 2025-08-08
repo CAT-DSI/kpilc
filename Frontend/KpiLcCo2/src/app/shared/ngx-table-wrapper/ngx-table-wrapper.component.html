@@ -1,0 +1,179 @@
+<!-- a wrapper for ngx datatable -->
+<div class="col-12">
+  <div class="ngx-table-wrapper">
+    <ngx-datatable 
+    [virtualization]="false"
+     [reorderable]="false" 
+     [footerHeight]="footerHeight"    
+     class="material" 
+     [columnMode]="'force'"
+      [rows]="currentPageRows" 
+      [columns]="columns" 
+      [scrollbarH]="true" 
+      [scrollbarV]="scrollbarV"
+       [rowHeight]="rowHeight"
+      [headerHeight]="headerHeight"      
+      [externalPaging]="externalPaging"
+    [limit]="pageSize"
+    [count]="totalRows"
+    [offset]="(pageIndex - 1) * pageSize"
+    
+      [externalSorting]="true"
+       (sort)="onSort($event)"
+        [sorts]="sorts"
+         [selectionType]="selectionType"
+      [selected]="selected" 
+      (select)="onSelectRow($event)"
+      [messages]="{emptyMessage: 'tableEmptyMessage' | translate: { default: 'No data to display'}}">
+
+      <!-- footer/pagination template -->
+    <ngx-datatable-footer>
+          
+      <ng-template 
+        ngx-datatable-footer-template
+      >
+        <ngb-pagination
+          *ngIf="showPagination"
+          [collectionSize]="totalRows"
+          [maxSize]="4"
+          [rotate]="true"
+          [pageSize]="pageSize ? pageSize : defaultPageSize"
+          [page]="pageIndex ? pageIndex : 1"
+          (pageChange)="setPage($event)"
+        >
+          <ng-template ngbPaginationPrevious>
+            <span class="with-icon">
+              <img class="icon" [src]="'assets/icons/arrow-left.svg'" />              
+            </span>
+          </ng-template>
+          <ng-template ngbPaginationNext>
+            <span class="with-icon">
+              <img class="icon" [src]="'assets/icons/arrow-right.svg'" />              
+            </span>
+          </ng-template>
+        </ngb-pagination>
+      </ng-template>
+    </ngx-datatable-footer>
+    </ngx-datatable>   
+  </div>
+</div>
+
+<!-- header template -->
+<ng-template #headerCellTmpl let-column="column" let-sort="sortFn" let-sortDir="sortDir">
+  <div class="datatable-header-cell-wrapper" (click)="rows.length > 0 && sort()">
+    <ng-container *ngIf="colHeaderTranslateKeyPrefix">
+      <!-- column props if present in commonColNames array will use the prefix 'commonColNames' -->
+      <span
+        [translate]="(commonColNames.indexOf(column.prop) > -1 ? 'commonColNames' : colHeaderTranslateKeyPrefix) + '.' + column.prop"
+        [translateParams]="{default: column.name}" style="font-family: 'Raleway-Bold', sans-serif;"></span>
+    </ng-container>
+    <!-- for tables for which column names come from the server -->
+    <ng-container *ngIf="!colHeaderTranslateKeyPrefix">
+      {{ column.prop }}
+    </ng-container>
+
+    <!-- Add filter input in header if filter is enabled    (input)="onFilterChange()"  -->
+    <form [formGroup]="filterForm">
+      <div *ngIf="column.filterable" class="filter-input-wrapper">
+        <input *ngIf="column.filterable" [formControlName]="column.prop" (input)="onFilterChange()" class="filter-input"
+          placeholder="Filter {{ column.name }}">
+      </div>
+    </form>
+    <div *ngIf="column.sortable" class="sort-icon"
+      [ngClass]="{'sort-asc' : sortDir === sortTypes.ASC, 'sort-desc' : sortDir === sortTypes.DESC}"></div>
+    <!-- inlineSVG="assets/icons/arrow-solid-down.svg" -->
+
+  </div>
+</ng-template>
+
+<!-- action column template -->
+
+<ng-template #actionColCellTmpl let-rowIndex="rowIndex">
+  <button class="btn btn-primary" (click)="onEditRow(rowIndex)">
+    <span class="with-icon">
+      <img class="icon" [src]="'assets/icons/edit.svg'" />
+      <span translate="buttons.edit" [translateParams]="{default: 'Edit'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+    </span>
+  </button>
+  <button class="btn btn-delete" (click)="onDeleteRow(rowIndex)">
+    <span class="with-icon">
+      <img class="icon" [src]="'assets/icons/icons8-delete.svg'" />
+      <span translate="buttons.delete" [translateParams]="{default: 'Delete'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+    </span>
+  </button>
+</ng-template>
+<ng-template #actionColCellTmpldelete let-rowIndex="rowIndex">
+
+  <button class="btn btn-primary" (click)="onEditRow(rowIndex)">
+    <span class="with-icon">
+      <!-- <span class="icon" inlineSVG="assets/icons/edit.svg"></span> -->
+      <img class="icon" [src]="'assets/icons/edit.svg'" />
+      <span translate="buttons.edit" [translateParams]="{default: 'Edit'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+    </span>
+  </button>
+</ng-template>
+
+<ng-template #actionColCellTmpledit let-rowIndex="rowIndex">
+
+  <button class="btn btn-delete" (click)="onDeleteRow(rowIndex)">
+    <span class="with-icon">
+      <img class="icon" [src]="'assets/icons/icons8-delete.svg'" />
+      <span translate="buttons.delete" [translateParams]="{default: 'Delete'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+    </span>
+  </button>
+</ng-template>
+
+<!-- status column template -->
+<ng-template #statusColCellTmpl let-value="value">
+  <span [style.color]="recordStatusColors[value]" appCorporateCodes [ccCategory]="CCCategories.RECORD_STATUS"
+    []="value"></span>
+</ng-template>
+
+<!-- user role column template -->
+<ng-template #roleColCellTmpl let-value="value">
+  <span appCorporateCodes [ccCategory]="CCCategories.USER_ROLE" [ccCode]="value"></span>
+</ng-template>
+
+<!-- center type column template -->
+<ng-template #centerTypeColCellTmpl let-value="value">
+  <span appCorporateCodes [ccCategory]="CCCategories.CENTER_TYPE" [ccCode]="value"></span>
+</ng-template>
+
+<!-- session status column template -->
+<ng-template #sessionStatusColCellTmpl let-value="value">
+  <span appCorporateCodes [ccCategory]="CCCategories.SESSION_STATUS" [ccCode]="value"></span>
+</ng-template>
+
+<!-- physical status column template -->
+<ng-template #physicalStatusColCellTmpl let-value="value">
+  <div class="validation-status-wrapper">
+    <app-status-indicator [color]="validationStatusColors[value]"></app-status-indicator>
+    <span class="txt is-ellipsis" [style.color]="validationStatusColors[value]" appCorporateCodes
+      [ccCategory]="CCCategories.PHYSICAL_FILE_STATUS" [ccCode]="value">
+    </span>
+  </div>
+</ng-template>
+
+<!-- local status column template -->
+<ng-template #localStatusColCellTmpl let-value="value">
+  <div class="validation-status-wrapper">
+    <app-status-indicator [color]="validationStatusColors[value]"></app-status-indicator>
+    <span class="txt is-ellipsis" [style.color]="validationStatusColors[value]" appCorporateCodes
+      [ccCategory]="CCCategories.LOCAL_IT_FILE_STATUS" [ccCode]="value">
+    </span>
+  </div>
+</ng-template>
+
+<!-- central status column template -->
+<ng-template #centralStatusColCellTmpl let-value="value">
+  <div class="validation-status-wrapper">
+    <app-status-indicator [color]="validationStatusColors[value]"></app-status-indicator>
+    <span class="txt is-ellipsis" [style.color]="validationStatusColors[value]" appCorporateCodes
+      [ccCategory]="CCCategories.CENTER_STATUS" [ccCode]="value">
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #numberCellTmpl let-value="value">
+  <span class="number-cell-value">{{value}}</span>
+</ng-template>

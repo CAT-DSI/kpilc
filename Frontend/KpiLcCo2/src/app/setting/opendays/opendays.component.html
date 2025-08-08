@@ -1,0 +1,64 @@
+<!-- users configuration page -->
+<app-sub-header [breadcrumbs]="breadcrumbs">
+    <div class="search-box" style=" height: 100%;
+    min-height: 30px;
+    width: 250px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #e7e7e7;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-family: 'Raleway-SemiBold', sans-serif;">
+        
+      <input type="text" placeholder="{{ 'placeholders.search' | translate: { default: 'Search'} }}" [(ngModel)]="search"
+        (change)="saverange()" />  
+      <img class="icon" style="margin-left: 12%;" [src]="'assets/icons/search.svg'" />
+    </div>
+      
+  </app-sub-header>
+  <form [formGroup]="userForm" autocomplete="off" #formRef="ngForm" [ngClass]="{'ng-form-submitted': formRef.submitted}">
+    <div class="row" style="margin-left: 18px;">
+      <div class="form-group col-md-3">
+        <div class="label" translate="formFieldLabels.country" [translateParams]="{default: 'Pays'}"></div>
+        <div class="form-input-wrapper">
+          <select class="form-select" formControlName="country">
+            <option [hidden]="true" disabled [selected]="CountryName!=null">{{CountryName}}</option>
+            <option *ngFor="let item of countryList" [ngValue]="item">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+        <div class="label" translate="formFieldLabels.year" [translateParams]="{default: 'Year'}"></div>
+        <div class="form-input-wrapper">
+          <select class="form-select" formControlName="year">
+            <option [hidden]="true" disabled [selected]="yearData!=null">{{yearData}}</option>
+            <option *ngFor="let item of yearList" [ngValue]="item">{{item.year}}</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="form-group col-md-2" style="margin-top: 26px;">
+        <button class="btn btn-primary" (click)="getOpenDays($event)">
+          <span style="font-family: 'Raleway-SemiBold', sans-serif;">{{ 'buttons.go' | translate: { default: 'Go' } }}</span>
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="main-content">   
+    <app-ngx-table-wrapper [rows]="tableRows | filter:search | paginate : pagingConfig" [columnsConfig]="tableColumns"
+      [colMinWidth]="colMinWidth" [colHeaderTranslateKeyPrefix]="colHeaderTranslateKeyPrefix" [totalRows]="totalRows"
+      [hasActionColdelete]="hasActionColdelete" [actionColFrozen]="true" (editRow)="editUser($event)" 
+      (pageSortEvent)="onPageSort($event)" [showPagination]="false" [selectionType]="selection" [selectedRow]="selectedSession">
+  
+    </app-ngx-table-wrapper>
+    <div class="d-flex justify-content-center">
+      <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"
+      style="font-family: 'Raleway-SemiBold', sans-serif;">
+      </pagination-controls>
+    </div>
+  </div>
+  
+  <ng-template #chkboxColCellTmpl let-row="row" let-value="value" let-rowIndex="rowIndex" let-isSelected="isSelected">
+    <app-checkbox [ngModel]="row.isDelayReport" [disabled]="true" (ngModelChange)="true"></app-checkbox>
+  </ng-template>

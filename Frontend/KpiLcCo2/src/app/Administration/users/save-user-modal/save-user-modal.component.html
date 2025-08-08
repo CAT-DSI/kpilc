@@ -1,0 +1,170 @@
+<!-- user add/edit modal -->
+<form [formGroup]="userForm" autocomplete="off" #formRef="ngForm" [ngClass]="{'ng-form-submitted': formRef.submitted}"
+  (ngSubmit)="onSubmit()">
+  <div class="modal-header" [translate]="headerTitle.key" [translateParams]="{default: headerTitle.defaultText}"
+    style="font-family: 'Raleway-Bold', sans-serif;"></div>
+  <div class="modal-body has-form">
+    <div class="error-message" *ngIf="saveError">{{saveError}}</div>
+
+
+    <div class="form-input-container is-required invisible">
+      <div class="label" translate="formFieldLabels.lastName" [translateParams]="{default: 'Last Name'}"></div>
+      <div class="form-input-wrapper">
+        <input type="text" name="id" class="form-input"
+          placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..." formControlName="id"
+          maxlength="250" />
+      </div>
+
+      <div class="form-input-wrapper">
+        <input type="text" name="id" class="form-input"
+          placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..." formControlName="userid"
+          maxlength="250" />
+      </div>
+      <div class="form-input-wrapper" style="visibility:hidden">
+        <input type="text" name="id" class="form-input" formControlName="UserType" maxlength="250" />
+      </div>
+    </div>
+    <div class="form-input-container is-required">
+      <div class="label" translate="formFieldLabels.firstName" [translateParams]="{default: 'First Name'}"></div>
+      <div class="form-input-wrapper">
+        <input type="text" name="firstName" class="form-input"
+          placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..."
+          formControlName="firstName" maxlength="250" />
+      </div>
+      <span style="color: red;" *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched">This
+        field is required</span>
+
+    </div>
+
+    <div class="form-input-container is-required">
+      <div class="label" translate="formFieldLabels.lastName" [translateParams]="{default: 'Last Name'}"></div>
+      <div class="form-input-wrapper">
+        <input type="text" name="lastName" class="form-input"
+          placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..."
+          formControlName="lastName" maxlength="250" />
+      </div>
+      <span style="color: red;" *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">This
+        field is required</span>
+    </div>
+
+
+    <div class="form-input-container" *ngIf="selectedId.value==null">
+      <div class="label" translate="formFieldLabels.country" [translateParams]="{default: 'Country'}"></div>
+      <div class="form-input-wrapper">
+        <div style="width:100%">
+          <ng-multiselect-dropdown formControlName="Country" [settings]="dropdownSettings" [data]="countryList"
+            (onDropDownClose)="onSelectAll($event)" (onSelect)="onItemSelect($event)"
+            style="font-family: 'Raleway-SemiBold', sans-serif; " placeholder="Choose">
+          </ng-multiselect-dropdown>
+        </div>
+
+      </div>
+    </div>
+    <div class="form-input-container is-required">
+      <div class="label" translate="formFieldLabels.role" [translateParams]="{default: 'Role'}"></div>
+      <div class="form-input-wrapper is-required">
+        <!-- <app-select-dropdown class="form-select" formControlName="roleId"
+          [options]="userRoleOptions"></app-select-dropdown>  <option value="" disabled [selected]="!roleId">Select</option> -->
+
+        <select class="form-select" formControlName="roleId" [(ngModel)]="roleId">
+          <option value="" disabled *ngIf="!roleId">Select</option>
+          <option *ngFor="let item of userRoleOptions" [ngValue]="item">{{ item }}</option>
+        </select>
+
+      </div>
+      <span style="color: red;" *ngIf="userForm.get('roleId')?.invalid && userForm.get('roleId')?.touched">This field is
+        required</span>
+
+    </div>
+
+
+    <div class="form-input-container" *ngIf="selectedId.value==null">
+      <div class="label" translate="formFieldLabels.pf" [translateParams]="{default: 'PF'}"></div>
+      <div class="form-input-wrapper">
+        <div style="width:100%">
+          <ng-multiselect-dropdown formControlName="pf" [settings]="dropdownSettings" [data]="pfoption"
+            (onSelect)="onItemSelect($event)" (onDeSelect)="onSelectAll($event)"
+            style="font-family: 'Raleway-SemiBold', sans-serif; " placeholder="Choose">
+          </ng-multiselect-dropdown>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="form-input-container is-required">
+      <div class="label" translate="formFieldLabels.email" [translateParams]="{default: 'Email'}"></div>
+      <div class="form-input-wrapper">
+        <input type="text" name="email" class="form-input"
+          placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..." formControlName="email"
+          maxlength="100" />
+      </div>
+      <span style="color: red;" *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">This field is
+        required</span>
+
+    </div>
+
+    <div class="form-input-container is-required">
+      <div class="label" translate="formFieldLabels.accessKey" [translateParams]="{default: 'Access Key'}"></div>
+      <div class="form-input-wrapper">
+        <!-- placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..." -->
+        <input type="text" name="accessKey" class="form-input" formControlName="accessKey" maxlength="250" readonly />
+        <button type="button" class="btn btn-primary is-big space-button"
+        [disabled]="!userForm.get('email')?.valid"
+         ngbAutofocus (click)="getAccessKey()">
+          <span class="with-icon">
+            <span translate="buttons.getAccessKey" [translateParams]="{default: 'Get Access key'}"
+              style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+          </span>
+        </button>
+      </div>
+      <span style="color: red;" *ngIf="userForm.get('accessKey')?.invalid && userForm.get('accessKey')?.touched">This
+        field is required</span>
+      <span style="color: red;" *ngIf="emailRequiredError">
+        Email is required to fetch the access key
+      </span>
+      <!-- <span style="color: red;" *ngIf="invalidEmailError">
+        Unable to retrieve the Windows access key for the given email ID. Please contact the administrator.
+      </span> -->
+    </div>
+
+
+
+    <div class="form-input-container is-required">
+      <div class="label" translate="formFieldLabels.Profile" [translateParams]="{default: 'Profile'}"></div>
+
+      <div class="form-input-wrapper">
+        <select class="form-select" formControlName="profileName" [ngModel]="selectedName"
+          (change)="changeCountry($event)">
+          <option value="" disabled [selected]="selectedName==null">Select</option>
+          <option [hidden]="true" disabled [selected]="selectedName!=null">{{selectedName}}</option>
+          <option *ngFor="let item of profilelist " [ngValue]="item">{{item.profileName}}</option>
+        </select>
+      </div>
+      <span style="color: red;"
+        *ngIf="userForm.get('profileName')?.invalid && userForm.get('profileName')?.touched">This field is
+        required</span>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary is-big" ngbAutofocus>
+      <span class="with-icon">
+        <img class="icon" [src]="'assets/icons/check.svg'" />
+        <span translate="buttons.save" [translateParams]="{default: 'Save'}"
+          style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+      </span>
+    </button>
+    <button type="button" class="btn btn-cancel is-big" (click)="activeModal.close('cancel')">
+      <span class="with-icon">
+        <!-- <span class="icon" inlineSVG="assets/icons/close.svg"></span> -->
+        <img class="icon" [src]="'assets/icons/close.svg'" />
+        <span translate="buttons.cancel" [translateParams]="{default: 'Cancel'}"
+          style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+      </span>
+    </button>
+
+  </div>
+</form>

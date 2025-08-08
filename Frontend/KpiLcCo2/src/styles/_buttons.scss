@@ -1,0 +1,107 @@
+// buttons
+
+// to remove dotted outline on button click in firefox
+button::-moz-focus-inner {
+  border: 0;
+}
+
+button,
+.btn {
+  font-family: $font-primary;
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  font-size: 14px;
+  line-height: 1;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:active:focus {
+    outline: none;
+    box-shadow: none;
+    box-shadow: none;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.btn {
+  font-size: 13px;
+  padding: 0 10px;
+  height: $btn-height;
+  font-weight: 400;
+  border-radius: $border-radius;
+  text-transform: capitalize;
+  color: $white;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:active:focus {
+    color: $white;
+    outline: none;
+    box-shadow: none;
+  }
+
+  &.is-big {
+    height: $btn-height-big;
+    font-size: 14px;
+    padding: 0 12px;
+  }
+
+  > .with-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .icon {
+      margin-right: 10px;
+    }
+  }
+
+  &.btn-primary,
+  &.btn-primary:not(:disabled) {
+    color: $white;
+    background-color: $color-bg-btn-primary;
+    outline: none;
+    box-shadow: none;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &:active:focus {
+      box-shadow: none;
+      outline: none;
+      background-color: $color-bg-btn-primary;
+    }
+
+    &:disabled {
+      cursor: default;
+      opacity: 0.5;
+    }
+  }
+
+  &.btn-cancel {
+    background-color: $gray-700;
+
+    // default cancel icon size
+    .with-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &.btn-delete {
+    background-color: $red;
+
+    .with-icon .icon {
+      width: 13px;
+      height: 16px;
+      // background-image: url("./assets/icons/delete.png");
+    }
+  }
+}

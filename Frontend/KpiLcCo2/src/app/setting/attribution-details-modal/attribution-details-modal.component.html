@@ -1,0 +1,45 @@
+<!-- user add/edit modal -->
+<form [formGroup]="userForm" autocomplete="off" #formRef="ngForm" [ngClass]="{'ng-form-submitted': formRef.submitted}"
+  (ngSubmit)="onSubmit()">
+  <div class="modal-header" [translate]="headerTitle.key" [translateParams]="{default: headerTitle.defaultText}" style="font-family: 'Raleway-SemiBold', sans-serif;"></div>
+  <div class="modal-body has-form">
+    <div class="error-message" *ngIf="saveError">{{saveError}}</div>
+
+    <div class="form-input-container is-required" >
+      <div class="label" translate="formFieldLabels.country" [translateParams]="{default: 'Pays'}"></div>
+
+      <div class="form-input-wrapper">
+        <select class="form-select" formControlName="country" (change)="changeCountry($event)">
+          <option *ngFor="let item of countryList" [ngValue]="item">{{item.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-input-container is-required">
+      <div class="label" translate="formFieldLabels.Platform" [translateParams]="{default: 'Platform'}"></div>
+      <div class="form-input-wrapper">
+        <select class="form-select" formControlName="pf">
+          <option *ngFor="let item of pflist" [ngValue]="item">{{item.plateform}}</option>
+        </select>
+      </div>
+    </div>
+  
+       
+  </div>
+
+  <div class="modal-footer">
+   
+    <button type="submit" class="btn btn-primary is-big" ngbAutofocus>
+      <span class="with-icon">       
+        <img class="icon" [src]="'assets/icons/check.svg'" />
+        <span translate="buttons.save" [translateParams]="{default: 'Save'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+      </span>
+    </button>
+
+    <button type="button" class="btn btn-cancel is-big" (click)="activeModal.close('cancel')">
+      <span class="with-icon">        
+        <img class="icon" [src]="'assets/icons/close.svg'" />
+        <span translate="buttons.cancel" [translateParams]="{default: 'Cancel'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+      </span>
+    </button>
+  </div>
+</form>

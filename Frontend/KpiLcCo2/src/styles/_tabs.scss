@@ -1,0 +1,44 @@
+// ngb bootstrap tabs, common styles
+.nav-tabs {
+  border: 0;
+  background-color: $color-theme-primary;
+
+  .nav-item {
+    margin: 0;
+  }
+
+  .nav-link {
+    color: $white;
+    padding: 0 25px;
+    line-height: $section-header-height;
+    border: 0;
+
+    &:hover,
+    &:focus {
+      border: 0;
+    }
+
+    &.active {
+      font-weight: 700;
+      color: $white;
+      background-color: transparent;
+      border-radius: 0;
+      position: relative;
+
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%) rotate(180deg);
+        width: 11px;
+        height: 5px;
+        //background-image: url("./assets/icons/");
+      }
+    }
+  }
+}
+
+.tab-content {
+  padding: 20px;
+}

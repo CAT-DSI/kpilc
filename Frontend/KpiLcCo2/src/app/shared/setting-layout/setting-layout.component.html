@@ -1,0 +1,31 @@
+<mat-toolbar color="primary" class="header">  
+    <span>KPI LC</span>
+    <span class="example-spacer">
+    </span>
+    <button mat-flat-button type="button" [routerLink]="['/reports']">
+      <mat-icon>home</mat-icon>
+    </button>
+    <mat-divider vertical style="height:30px"></mat-divider>
+    <button mat-flat-button type="button" [matMenuTriggerFor]="menu">
+      {{ user ? user.name : ''}}
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout();"><mat-icon>power_settings_new</mat-icon> Logout</button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <mat-toolbar class="subnav">
+    <div fxFlex fxLayout fxHide.xs><!--fxLayoutAlign="end"-->
+        <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+          <li *ngFor="let config of settings">
+            <a  mat-button [routerLink]="config.url" [class]="config.active ? 'active':''">{{config.title}}</a>
+          </li>
+        </ul>
+    </div>
+  </mat-toolbar>
+  <mat-sidenav-container class="container">
+    <mat-sidenav-content>
+          <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

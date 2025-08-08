@@ -1,0 +1,39 @@
+@import "variables";
+
+.sub-header {
+  // background-color: rgba($gray-300, 0.3);
+  padding: 12px 15px;
+  display:  flex;
+  align-items: center;
+  background-color: rgba(231,231,231,.3);
+
+  .breadcrumbs {
+    margin-right: auto;
+    padding-right: 20px;
+    text-transform: capitalize;
+    color: $color-text-secondary;
+
+    .sep {
+      padding: 0 5px;
+    }
+  }
+
+  ::ng-deep {
+    
+    .btns-group {
+
+      .btn {
+        margin-left: 10px;
+
+        &.btn-download,
+        &.btn-upload {
+
+          .icon svg {
+            width: 16px;
+            height: 14px;
+          }
+        }
+      }
+    }
+  }
+}

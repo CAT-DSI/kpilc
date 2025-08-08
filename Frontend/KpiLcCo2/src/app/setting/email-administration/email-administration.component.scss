@@ -1,0 +1,139 @@
+.message-container {
+  display: flex;
+  justify-content: flex-end;
+  /* Align message to the right */
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.message {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  display: inline-block;
+  width: auto;
+  transition: opacity 0.5s ease-in-out;
+  /* Fade-out effect */
+}
+
+.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+:host ::ng-deep {
+  .ngx-table-wrapper {
+    .ngx-datatable {
+     
+      // header
+      .datatable-header {
+        .datatable-header-cell {
+          .datatable-header-cell-wrapper {
+            padding: 10px 0px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: visible !important;
+            min-width: 150px;
+            max-width: 100%;
+          }
+
+        }
+      }
+      .datatable-body{
+        .datatable-row-wrapper{
+          .datatable-body-cell-label{
+            margin-left: 20px;
+          }
+        }
+      }  
+    }
+  }
+}
+
+.main-content {
+  padding: 20px;
+  margin-top: 40px;
+}
+
+button {
+  background-color: #00518f;
+   color: #e7e7e7;
+}
+
+.customeButton{
+  float: right;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+// .column-visibility-toggles{
+//   box-shadow: 7.1px 7.1px 9.9px .1px #0003;
+//   padding: 10px;
+// }
+
+.column-visibility-toggles {
+  position: absolute;  /* Makes it overlay the grid */
+  top: 160px;  /* Position it at the top of the parent container */  
+  right: 10px;
+  background-color: rgba(255, 255, 255, 1.8);  /* Light transparent background */
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 1000;  /* Ensure it stays on top of the grid */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Optional: adds a shadow around the panel */
+  max-height: 60%;  /* You can adjust the height as needed */
+  overflow-y: auto;
+  width: 210px;
+  max-width: 90%;  /* You can adjust the width */
+  margin: 10px auto;
+}
+.column-visibility-toggles.show {
+  display: block;
+}
+.column-visibility-toggles label {
+  display: block;
+  margin: 10px 0;
+  font-size: 14px;
+}
+.column-visibility-toggles input[type="checkbox"] {
+  margin-right: 10px;  
+}
+
+.toggle-checkbox{
+  accent-color: #00518f;
+  font-family: 'Raleway-SemiBold', sans-serif;
+}
+
+.pagination-controls ul li.current span {
+  font-family: 'Raleway-SemiBold', sans-serif !important;
+}
+
+.pagination-controls ul li.pagination-previous span {
+  font-family: 'Raleway-Bold', sans-serif !important;
+}
+
+.pagination-controls ul li.pagination-next span {
+  font-family: 'Raleway-Bold', sans-serif !important;
+}
+
+
+
+
+
+

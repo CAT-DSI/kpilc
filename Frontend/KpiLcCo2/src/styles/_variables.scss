@@ -1,0 +1,40 @@
+// colors
+$white: #ffffff;
+$black: #000000;
+
+$blue: #00518f;
+$cyan: #0097bf;
+$orange: #ff8111;
+$green: #00b13b;
+$red: #fe1300;
+$red-soft: #ec6952;
+
+$gray-300: #e7e7e7;
+$gray-400: #b6b6b6;
+$gray-500: #333333;
+$gray-700: #666666;
+
+$color-theme-primary: $blue;
+$font-primary: "Open Sans", Arial, sans-serif;
+
+$color-bg-body: $white;
+$color-bg-overlay: rgba($black, 0.2);
+$color-error: $red;
+
+$color-text-primary: $black;
+$color-text-secondary: $gray-700;
+$color-link: $cyan;
+
+$color-bg-btn-primary: $color-theme-primary;
+$btn-height: 30px;
+$btn-height-big: 40px;
+
+$section-header-height: 50px;
+
+$card-shadow: 0 10px 20px 5px rgba($black, 0.1);
+
+$border-radius: 4px;
+$border-color: $gray-300;
+
+$form-input-height: 40px;
+$form-input-height-small: 35px;

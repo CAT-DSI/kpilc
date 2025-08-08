@@ -1,0 +1,94 @@
+// common ngb pagination styles
+ngb-pagination {
+
+  .pagination {
+    align-items: center;
+
+    .page-item {
+      margin: 0 5px;
+
+      &:first-child,
+      &:last-child {
+        
+        background-color: $color-theme-primary;
+        border-radius: $border-radius;
+
+        &.disabled {
+          background-color: $gray-700;
+        }
+
+        .page-link {
+          width: 20px;
+          height: 20px;
+          font-size: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      &:first-child {
+        order :1;
+        margin-left: 30px;
+      }
+
+      &:last-child {
+        order: 2;
+        margin-right: 0;
+      }
+
+      .page-link {
+        color: $color-theme-primary;
+        border: 0;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 16px;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0 4px;
+        margin: 0;
+        border-radius: $border-radius;
+        text-align: center;
+      }
+
+      &.active {
+
+        .page-link {
+          background-color: $color-theme-primary;
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
+// page size options
+.page-size-wrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+
+  .txt {
+    font-size: 12px;
+    color: $color-text-secondary;
+  }
+
+  .page-size-options {
+    margin-right: 10px;
+    width: 70px;
+
+    .dropdown-container .dropdown-wrapper {
+
+      .dropdown-toggle {
+        height: 25px;
+        font-size: 13px;
+        padding: 0 10px 0 8px;
+      }
+
+      .dropdown-menu .dropdown-item {
+        padding: 7px 8px;
+        font-size: 12px;
+      }
+    }
+  }
+}

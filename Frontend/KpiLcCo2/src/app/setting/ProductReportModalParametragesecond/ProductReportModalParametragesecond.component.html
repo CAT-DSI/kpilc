@@ -1,0 +1,38 @@
+<!-- user add/edit modal -->
+<form [formGroup]="userForm" autocomplete="off" #formRef="ngForm" [ngClass]="{'ng-form-submitted': formRef.submitted}"
+  (ngSubmit)="onSubmit()">
+  <div class="modal-header" [translate]="headerTitle.key" 
+  [translateParams]="{default: headerTitle.defaultText}" style="font-family: 'Raleway-SemiBold', sans-serif;"></div>
+  <div class="modal-body has-form">
+    <div class="error-message" *ngIf="saveError">{{saveError}}</div>
+
+    <div class="form-input-container is-required">
+      <div class="label" translate="formFieldLabels.KPI" [translateParams]="{default: 'KPI'}" style="font-family: 'Raleway-Bold', sans-serif;"></div>
+      <div class="form-input-wrapper">
+        <input type="text" name="kpi" class="form-input"
+          placeholder="{{ 'placeholders.typeHere' | translate: { default: 'Type here'} }} ..."
+          formControlName="kpi" maxlength="250" />
+    </div>
+    </div>
+   
+   
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary is-big" ngbAutofocus>
+      <span class="with-icon">
+        <!-- <span class="icon" inlineSVG="assets/icons/check.svg"></span> -->
+        <img class="icon"  [src]="'assets/icons/check.svg'"  />
+        <span translate="buttons.save" [translateParams]="{default: 'Save'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+      </span>
+    </button>
+
+    <button type="button" class="btn btn-cancel is-big" (click)="activeModal.close('cancel')">
+      <span class="with-icon">
+        <!-- <span class="icon" inlineSVG="assets/icons/close.svg"></span> -->
+        <img class="icon"  [src]="'assets/icons/close.svg'"  />
+        <span translate="buttons.cancel" [translateParams]="{default: 'Cancel'}" style="font-family: 'Raleway-SemiBold', sans-serif;"></span>
+      </span>
+    </button>  
+  </div>
+</form>

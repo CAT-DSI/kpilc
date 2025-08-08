@@ -1,0 +1,89 @@
+
+
+
+
+<div *ngIf="form" [formGroup]="form" >
+  
+  <div [ngSwitch]="criteria.controlType" >
+
+    
+    
+    <mat-label  class="matlabel"> {{  criteria.label | translate }}</mat-label>
+ 
+         <mat-form-field appearance="fill" *ngSwitchCase="'textbox'" [style.width.%]="80">
+            <!-- <mat-label>{{criteria.label}}</mat-label> -->
+            <input  [id]="criteria.key" (change)="valuechanged($event)" [type]="criteria.type"
+             matInput placeholder="" [matTooltip]=criteria.label   [formControlName]="criteria.key" [required]="criteria.required">
+            <mat-error *ngIf="!form.controls[criteria.key].valid">{{getError(criteria.key)}}</mat-error>
+        </mat-form-field>
+       
+      
+
+        <mat-form-field  class="droodn"
+        appearance="fill" *ngSwitchCase="'dropdown'" [style.width.%]="94">
+       
+             <!-- <input #filterInput matInput type="input" (keyup)="filter($event);"> (selectionChange)="valuechanged($event)"-->
+             <mat-select [formControlName]="criteria.key"  [matTooltip]=criteria.label  (selectionChange)="valuechanged($event)"  (openedChange)="openedChange($event)"
+             [multiple]="criteria.multiple" [required]="criteria.required">
+             <mat-option style="margin-left:-100%;">
+               <ngx-mat-select-search   style="text-align: center;" [formControl]="bankMultiFilterCtrl" placeholderLabel="search..." 
+               noEntriesFoundLabel="no matching record found">
+                 <!-- <mat-icon ngxMatSelectSearchClearv >clear</mat-icon> -->
+                 <span aria-hidden="true" (click)="toggleAllSelecti($event)" class="close" ngxMatSelectSearchClear>&times;</span>
+               </ngx-mat-select-search>
+             </mat-option>
+             
+
+             <mat-option  *ngIf="filteredOptions1 && filteredOptions.length > 0"
+               (click)="toggleAllSelection()" #allSelected [value]="-1">All</mat-option>
+             
+               <mat-option  (click)="togglePerOne(allSelected.viewValue)" 
+               *ngFor="let option of filteredOptions " [value]="option.value" >
+             
+                 {{option.key}}
+               </mat-option>
+              
+             </mat-select>
+             <mat-error *ngIf="!form.controls[criteria.key].valid">{{getError(criteria.key)}}</mat-error>
+           </mat-form-field>
+        
+          <mat-form-field class="datetext"  appearance="fill"  *ngSwitchCase="'date'"   [style.width.%]="30">
+            <!-- <mat-label> {{ 'TOPIC' | translate: {value: criteria.label} }}</mat-label> -->
+            <div class="centertext"  >
+           
+            <input matInput (dateChange)="dateChanged($event)" [id]="criteria.key" 
+            [formControlName]="criteria.key" matIconSuffix  [matDatepicker]="picker" [required]="criteria.required">
+            </div>
+            <mat-datepicker-toggle matSuffix [for]="picker"  ></mat-datepicker-toggle>
+            <mat-datepicker #picker  ></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill"  *ngSwitchCase="'month'"   [style.width.%]="80">
+            <!-- <mat-label> {{ 'Month' | translate: {value: criteria.label} }}</mat-label> -->
+            <input matInput [value]="month ? month : ''" >
+            <input matInput [matDatepicker]="dp" [id]="criteria.key" [matTooltip]=criteria.label  matTooltipPosition="right"  
+            [formControlName]="criteria.key" [required]="criteria.required" [hidden]="true">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp startView="multi-year" (monthSelected)="chosenMonthHandler($event, dp, criteria.key)">
+            </mat-datepicker>
+          </mat-form-field> 
+        
+          <mat-form-field appearance="fill" *ngSwitchCase="'week'"   [style.width.%]="80">
+            <!-- <mat-label> {{ 'Week' | translate: {value: criteria.label} }}</mat-label> -->
+            <input matInput [id]="criteria.key" [name]="criteria.key" [matTooltip]=criteria.label  matTooltipPosition="right"
+            [formControlName]="criteria.key"  [required]="criteria.required">
+            <input [matDatepicker]="picker" (dateChange)="dateChanged($event)" type="hidden">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill" *ngSwitchCase="'number'" [style.width.%]="80">
+            <!-- <mat-label> {{ 'Number' | translate: {value: criteria.label} }}</mat-label> -->
+            <input [id]="criteria.key" (change)="valuechanged($event)" [type]="criteria.controlType" [matTooltip]=criteria.label  matTooltipPosition="right" min="2" max="4"
+             matInput placeholder="" [formControlName]="criteria.key" [required]="criteria.required">
+            <mat-error *ngIf="!form.controls[criteria.key].valid">{{getError(criteria.key)}}</mat-error>
+        </mat-form-field>
+
+    </div>
+</div>
+

@@ -1,0 +1,11 @@
+::ng-deep snack-bar-container.alert-red{
+  padding: 20px;
+  background-color: red;
+  color: white;
+}
+
+::ng-deep snack-bar-container.alert-success{
+    padding: 20px;
+    background-color: rgb(4, 209, 89);
+    color: white;
+  }

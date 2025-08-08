@@ -1,0 +1,151 @@
+/* normalize */
+// also override some bootstrap default styles
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+  outline: none;
+  flex-shrink: 0;
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-primary;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+}
+
+ol, ul {
+  list-style: none;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+p,
+label {
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+/* base/common styles */
+body {
+  font-family: $font-primary;
+  line-height: 1;
+  font-size: 14px;
+  font-weight: 400;
+  color: $color-text-primary;
+  background-color: $color-bg-body;
+  -ms-overflow-style: scrollbar;  // to fix IE scrollbar issue
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  color: $color-link;
+  
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    outline: none;
+  }
+
+  &:hover {
+    opacity: 0.9;
+    color: $color-link;
+  }
+}
+
+
+// helper classes
+.flex-grow {
+  flex-grow: 1;
+}
+
+.flex-shrink {
+  flex-shrink: 1;
+}
+
+// align child element in the center
+.align-item-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// text ellipsis
+.is-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.error-message {
+  color: $red;
+  font-weight: 600;
+}
+
+// default padding around main content
+.main-content {
+  padding: 30px;
+}
+
+// user input
+input,
+textarea {
+  font-family: $font-primary;
+}
+
+input,
+input:focus {
+  width: auto;
+  border: 0;
+  line-height: normal;
+  color: $color-text-secondary;
+  font-size: 14px;
+  // -webkit-appearance: none;
+  padding: 0 12px;
+  margin: 0;
+  box-shadow: none;
+  outline: none;
+
+  &::-ms-clear, &::-ms-reveal {
+    display: none;
+  }
+
+  @include input-placeholder($color-text-secondary);
+}
+
+input[type=search]::-webkit-search-cancel-button {
+  display: none;
+}
+
+textarea,
+textarea:focus {
+  display: block;
+  color: $color-text-secondary;
+  font-size: 16px;
+  line-height: 20px;
+  outline: none;
+  box-shadow: none;
+  border: 0;
+  margin: 0;
+  padding: 16px;
+  resize: none;
+  -webkit-appearance: none;
+
+  @include input-placeholder($color-text-secondary);
+}

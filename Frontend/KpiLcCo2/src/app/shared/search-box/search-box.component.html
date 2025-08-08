@@ -1,0 +1,15 @@
+<!-- search box -->
+<div class="search-box">
+  <input
+    type="text"
+    placeholder="{{ 'placeholders.search' | translate: { default: 'Search'} }}"
+    [(ngModel)]="searchText"
+    (keyup.enter)="onSearchTrigger()"
+  />
+  <!-- <span
+    class="icon"
+    inlineSVG="assets/icons/search.svg"
+    (click)="onSearchTrigger()"
+  ></span> -->
+  <img class="icon" (click)="onSearchTrigger()" [src]="'assets/icons/search.svg'"  />
+</div>

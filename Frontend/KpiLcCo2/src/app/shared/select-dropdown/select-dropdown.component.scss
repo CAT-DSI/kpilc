@@ -1,0 +1,125 @@
+// @import "variables";
+
+// $transition-duration: 0.2s;
+// $transition-timing-function: linear;
+
+// ::ng-deep .dropdown-container {
+//   width: 100%;
+  
+//   // dropdown-label
+//   .label {
+//     text-transform: capitalize;
+//     font-weight: 600;
+//     margin-bottom: 8px;
+//   }
+
+//   // dropdown-wrapper
+//   .dropdown-wrapper {
+//     font-size: 14px;
+//     font-weight: 400;
+
+//     .dropdown-toggle {
+//       cursor: pointer;
+//       display: flex;
+//       align-items: center;
+//       justify-content: space-between;
+//       padding: 0 10px 0 12px;
+//       border: 1px solid $border-color;
+//       border-radius: $border-radius;
+//       height: $form-input-height;
+//       background-color: #fff;
+//       color: $color-text-secondary;
+//       line-height: 1.5;
+
+//       &.is-disabled {
+//         pointer-events: none;
+//         background-color: rgba($gray-300, 0.5);
+//       }
+
+//       .selected-value {
+//         width: calc(100% - 22px);
+//       }
+
+//       .icon-dropdown-caret {
+//         line-height: 0;
+//         transition: all $transition-duration $transition-timing-function;
+
+//         ::ng-deep svg {
+//           fill: $color-theme-primary;
+//         }
+//       }
+//     }
+
+//     .dropdown-menu {
+//       width: 100%;
+//       border: 1px solid $border-color;
+//       border-radius: $border-radius;
+//       font-size: 13px;
+//       max-height: 300px;
+//       overflow: auto;
+//       min-width: 0;
+
+//       .dropdown-item {
+//         line-height: 1.45;
+//         padding: 11px 12px;
+//         color: $color-theme-primary;
+//         white-space: normal;
+
+//         &:not(:last-child) {
+//           border-bottom: 1px dashed $border-color;
+//         }
+
+//         &:first-child {
+//           border-radius: $border-radius $border-radius 0 0;
+//         }
+
+//         &:last-child {
+//           border-radius: 0 0 $border-radius $border-radius;
+//         }
+
+//         &.is-selected,
+//         &:hover {
+//           background-color: $gray-300;
+//           color: $color-text-secondary;
+//         }
+//       }
+//     }
+
+//     &.show {
+
+//       .dropdown-toggle {
+
+//         .icon-dropdown-caret {
+//           transform: rotate(-180deg);
+//         }
+//       }
+//     }
+//   }
+
+//   // small dropdowns
+//   &.is-small {
+
+//     .dropdown-wrapper {
+
+//       .dropdown-toggle {
+//         height: $form-input-height-small;
+
+//         .icon-dropdown-caret {
+
+//           ::ng-deep svg {
+//             width: 8px;
+//             height: 5px;
+//           }
+//         }
+//       }
+
+//       .dropdown-menu {
+
+//         .dropdown-item {
+//           padding-top: 8px;
+//           padding-bottom: 8px;
+//         }
+//       }
+//     }
+//   }
+// }

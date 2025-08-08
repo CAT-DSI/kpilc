@@ -1,0 +1,39 @@
+<!-- users configuration page -->
+<app-sub-header [breadcrumbs]="breadcrumbs">
+ 
+
+  <div class="btns-group"> 
+    <button class="btn btn-primary" (click)="addUser()">
+      <span class="with-icon">
+        <!-- <span class="icon" inlineSVG="assets/icons/add-new.svg"></span> -->
+        <img class="icon" [src]="'assets/icons/add-new.svg'" />
+        <span>{{ 'buttons.addNew' | translate: { default: 'Add New' } }}</span>
+      </span>
+    </button>
+  </div>
+</app-sub-header>
+
+<div class="main-content">
+  <!-- <pre >{{tableRows.length | json }}</pre> -->
+  <app-ngx-table-wrapper [rows]="tableRows"
+   [columnsConfig]="tableColumns"
+    [colMinWidth]="colMinWidth" 
+    [colHeaderTranslateKeyPrefix]="colHeaderTranslateKeyPrefix"
+     [totalRows]="totalRows"
+    [hasActionColedit]="hasActionColedit" 
+    [actionColFrozen]="true" 
+    (editRow)="editUser($event)" 
+    (deleteRow)="deleteUser($event)"
+   
+    [pageSize]="basicParams?.pageSize"
+     [selectionType]="selection" 
+     [selectedRow]="selectedSession">    
+  </app-ngx-table-wrapper>  
+  
+</div>
+<!-- Table Header Filtration Template -->
+
+<ng-template #chkboxColCellTmpl let-row="row" let-value="value" let-rowIndex="rowIndex" let-isSelected="isSelected">
+  <app-checkbox [ngModel]="row.isDealer" [disabled]="true" (ngModelChange)="true"></app-checkbox>
+</ng-template>
+<Footer [updateinfo]="updateinfo"></Footer>

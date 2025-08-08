@@ -1,0 +1,39 @@
+<!-- custom select dropdown -->
+<div class="dropdown-container" [class.is-small]="isSmall">
+  <div *ngIf="label" class="label">{{label}}</div>
+  <div
+    ngbDropdown
+    class="dropdown-wrapper"
+    [placement]="placement"
+    
+  >
+    <div ngbDropdownToggle [class.is-disabled]="isDisabled">
+      <span class="selected-value is-ellipsis" [ngClass]="{'is-placeholder' : !selectedOption}">
+        <!-- for placeholder apply static translate -->
+        <span *ngIf="!selectedOption" [translate]="placeholder.key" [translateParams]="{default: placeholder.defaultText}"></span>
+
+        <!-- if option has been selected -->
+        <ng-container *ngIf="selectedOption">
+          <!-- if there is no CC transformation then simply print the option -->
+          <ng-container *ngIf="!ccCategory">{{ selectedOption }}</ng-container>
+          <!-- apply CC transform -->
+          <span *ngIf="ccCategory" appCorporateCodes ></span>
+        </ng-container>
+      </span>
+      <span class="icon-dropdown-caret"></span>
+    </div>
+    <ul ngbDropdownMenu>
+      <li
+        ngbDropdownItem
+        *ngFor="let option of options; let i = index"
+        (click)="selectedOption !== option && updateSelection(i)"
+        [ngClass]="{'is-selected' : selectedOption === option }"
+      >
+        <ng-container   *ngIf="!ccCategory">{{ option }}</ng-container>
+        <!-- apply corporate code if passed -->
+        <span *ngIf="ccCategory" appCorporateCodes></span>
+      </li>
+    </ul>
+   
+  </div>
+</div>

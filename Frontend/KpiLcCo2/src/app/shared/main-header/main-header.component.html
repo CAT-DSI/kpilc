@@ -1,0 +1,177 @@
+<header class="header">
+  <img class="icon1" [src]="'./assets/img/Ecat.png'" style="width: 100px;" />
+  <!-- <a  target="_self"
+   mat-icon-button title="KPI LC" class="logo" aria-roledescription="Return to the old application">KPI LC
+  </a> -->
+
+  <!-- <span  href="http://intranet.groupecat.com//CATLCR/Configuration/Reports.aspx" target="_self" style="font-size: 22px;">KPI LC</span> -->
+  <span class="example-spacer">
+  </span>
+  <nav class="main-nav">
+    <ng-container *ngFor="let nav of navigationMenu">
+      <ng-container
+        *ngIf="nav.roles.indexOf(loggedInUserRoleId) > -1 || !loadhash.isEmpty(loadhash.intersection(nav.reportroles, showroleid))">
+
+        <div *ngIf="nav.route" class="nav-item">
+
+          <div class="nav-item-link" [routerLink]="nav.route" routerLinkActive="is-active">
+          </div>
+          <!-- <div class="icon-container" [inlineSVG]="nav.icon" ></div> -->
+          <img class="icon-container1" [src]="nav.icon" />
+          <div [translate]="nav.key" [translateParams]="{default: nav.defaultText}"></div>
+        </div>
+
+
+
+
+        <!-- nav item with sub navigation -->
+        <div *ngIf="!nav.route " class="nav-item dropdown" ngbDropdown routerLinkActive="is-active"
+          style="align-items: center; display: flex; justify-content: center; padding: 2rem">
+          <div class="nav-item-link" ngbDropdownToggle #iconContainer (click)="onIconClick(iconContainer, $event)">
+            <img class="icon-container" [src]="nav.icon" />
+            <div [translate]="nav.key" [translateParams]="{default: nav.defaultText}"></div>
+          </div>
+
+
+
+          <!-- sub nav dropdown -->
+
+          <ul class="sub-nav set-style my-div" ngbDropdownMenu #subNavWrapper #menu>
+            <ng-container *ngFor="let subNav of nav.subNav">
+              <li
+                *ngIf="subNav.route &&  (loadhash.intersectionWith(subNav.showmenu, showroleid, loadhash.isEqual) > 0 || subNav.showmenu == 30)"
+                ngbDropdownItem [routerLink]="subNav.route" routerLinkActive="is-active">
+
+                <div [translate]="subNav.key" class="nosubnav" [translateParams]="{default: subNav.defaultText}" style="font-family: 'Raleway-Bold', sans-serif;">
+                </div>
+              </li>
+
+
+              <!-- navigation with second level of navigation (mouseover)="over(drop, subNav.key)" (mouseout)="out(drop,subNav.key)"-->
+              <li *ngIf="!subNav.route && (!loadhash.isEmpty(loadhash.intersection(subNav.showmenu, showroleid)) || subNav.showmenu == 30)"
+    ngbDropdown #drop="ngbDropdown" (click)="toggleSubMenu(drop, subNav.key)" class="sub-nav-item">
+    
+    <div class="parent" ngbDropdownToggle *ngIf="(!loadhash.isEmpty(loadhash.intersection(subNav.showmenu, showroleid)) || subNav.showmenu == 30)"
+    style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="child" *ngIf="subNav.defaultText" [translate]="subNav.key"
+            [translateParams]="{default: subNav.defaultText}" style="font-family: 'Raleway-Bold', sans-serif;">
+        </div>
+
+        <!-- Icon for this sub-nav item -->
+        <img [src]="getSubNavIcon(subNav.key)" alt="sub-nav-icon" class="sub-nav-icon" width="12" height="12" >
+    </div>
+
+    <!-- Super Sub Navigation -->
+    <div #subNavWrapper class="super-sub-nav custome-super-sub-nav">
+        <ul class="super-sub-nav" ngbDropdownMenu>
+            <li ngbDropdownItem routerLinkActive="is-active" *ngIf="subNav.nestedsubNav">
+                <div>
+                    <ng-container *ngFor="let nestedsubNav of nav.subNav">
+                        <ng-container *ngFor="let nestedsubNav1 of nestedsubNav.nestedsubNav">
+                            <li *ngIf="nestedsubNav1.route1 && (loadhash.intersectionWith(nestedsubNav1.showmenu, showroleid, loadhash.isEqual) > 0 || nestedsubNav1.showmenu == 30)"
+                                ngbDropdownItem [routerLink]="[nestedsubNav1.route1]" routerLinkActive="is-active" style="padding:0px;">
+                                <div [translate]="nestedsubNav1.key" class="Navposition"
+                                    [translateParams]="{default: nestedsubNav1.defaultText}" style="font-family: 'Raleway-SemiBold', sans-serif;">
+                                </div>
+                            </li>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- More Sub Navigation Items (Super Sub Nav 1) -->
+    <ul class="super-sub-nav1" ngbDropdownMenu style="left: -294px; top: 196%;">
+        <li ngbDropdownItem routerLinkActive="is-active" class="nestedsubnav" *ngIf="subNav.nestedsubNav1">
+            <div>
+                <ng-container *ngFor="let nestedsubNav1 of nav.subNav">
+                    <ng-container *ngFor="let nestedsubNav1 of nestedsubNav1.nestedsubNav1">
+                        <li *ngIf="nestedsubNav1.route1 && (loadhash.intersectionWith(nestedsubNav1.showmenu, showroleid, loadhash.isEqual) > 0 || nestedsubNav1.showmenu == 30)"
+                            ngbDropdownItem [routerLink]="[nestedsubNav1.route1]" routerLinkActive="is-active">
+                            <div [translate]="nestedsubNav1.key" class="Navposition"
+                                [translateParams]="{default: nestedsubNav1.defaultText}" style="font-family: 'Raleway-SemiBold', sans-serif;">
+                            </div>
+                        </li>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </li>
+    </ul>
+
+    <!-- More Sub Navigation Items (Super Sub Nav 2) -->
+    <ul class="super-sub-nav" ngbDropdownMenu style="left: -294px; top: 196%;">
+        <li ngbDropdownItem routerLinkActive="is-active" class="nestedsubnav" *ngIf="subNav.nestedsubNav2">
+            <div>
+                <ng-container *ngFor="let nestedsubNav1 of nav.subNav">
+                    <ng-container *ngFor="let nestedsubNav1 of nestedsubNav1.nestedsubNav2">
+                        <li *ngIf="nestedsubNav1.route1 && (loadhash.intersectionWith(nestedsubNav1.showmenu, showroleid, loadhash.isEqual) > 0 || nestedsubNav1.showmenu == 30)"
+                            ngbDropdownItem [routerLink]="[nestedsubNav1.route1]" routerLinkActive="is-active">
+                            <div [translate]="nestedsubNav1.key" class="Navposition"
+                                [translateParams]="{default: nestedsubNav1.defaultText}" style="font-family: 'Raleway-SemiBold', sans-serif;">
+                            </div>
+                        </li>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </li>
+    </ul>
+</li>
+
+          
+    </ng-container>
+
+    </ul>
+
+    </div>
+
+
+
+    </ng-container>
+    </ng-container>
+
+  </nav>
+
+
+
+  <!-- <option (selectionChange)="search($event)" *ngFor="let category of categories" [value]="category.id">
+  {{category.name}}
+</option> -->
+
+  <!-- logged in user -->
+  <div class="loggedin-user">
+    <div ngbDropdown class="language-selector" placement="bottom-right">
+      <div ngbDropdownToggle class="selected-value">
+        <img class="flag" [src]="currentLanguage?.flagUrl" alt="flag" />
+        <div class="current-lang">{{currentLanguage?.text}}</div>
+
+      </div>
+      <!-- <ul ngbDropdownMenu
+          class="lang-options">
+        <li ngbDropdownItem
+            *ngFor="let lang of i18nLanguages"
+            [class.is-active]="currentLanguage?.id === lang.id"
+            (click)="setLanguage(lang.id)">
+          {{ lang.text }}
+        </li>
+      </ul> -->
+
+      <ul ngbDropdownMenu class="lang-options">
+        <li ngbDropdownItem class="lang-options1" *ngFor="let lang of i18nLanguages"
+          [class.is-active]="currentLanguage?.id === lang.id" (click)="setLanguage(lang.id)">
+          {{ lang.text }}
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="username is-ellipsis" [title]="loggedInUsername">{{username | titlecase}}</div>
+
+
+    <!-- <button class="btn btn-primary btn-logout"
+            translate="buttons.logout"
+            [translateParams]="{default: 'Logout'}"
+            (click)="logout()"></button> -->
+  </div>
+</header>
