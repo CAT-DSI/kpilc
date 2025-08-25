@@ -32,8 +32,8 @@ jobs:
            
       - name: List publish directory
         shell: powershell
-        run: Get-ChildItem -Path C:\deploy\publish  
+        run: Get-ChildItem -Path C:\deploy\publishkpilc  
      
       - name: Deploy to IIS folder
         run: |
-          Copy-Item -Path "C:\deploy\publish\*" -Destination "E:\WEBRoot\EAD Github" -Recurse -Force     
+          Copy-Item -Path "C:\deploy\publishkpilc\*" -Destination "E:\WEBRoot\KPILCGithub" -Recurse -Force     
