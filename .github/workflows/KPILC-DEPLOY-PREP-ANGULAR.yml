@@ -1,0 +1,39 @@
+# This workflow will build a .NET project1
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Build and Deploy KPILC .NET App (on Self-hosted)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted  # Make sure your runner is registered as 'self-hosted'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4      
+       
+      - name: Restore NuGet packages      
+        run: |
+         & "C:/Program Files (x86)/Microsoft Visual Studio/20222/BuildTools/MSBuild/Current/Bin/MSBuild.exe" API/CATLCR-BackEnd.sln /t:restore
+
+      - name: Build with MSBuild
+        run: |
+          & "C:\Program Files (x86)\Microsoft Visual Studio\20222\BuildTools\MSBuild\Current\Bin\MSBuild.exe" API/CATLCR-BackEnd/CATLCR-BackEnd.csproj /p:Configuration=Release
+
+        
+      - name: Publish with MSBuild
+        shell: powershell
+        run: |
+         & "C:\Program Files (x86)\Microsoft Visual Studio\20222\BuildTools\MSBuild\Current\Bin\MSBuild.exe" API/CATLCR-BackEnd/CATLCR-BackEnd.csproj /t:Publish /p:Configuration=Release /p:PublishDir="C:\deploy\publishkpilc\"
+          
+           
+      - name: List publish directory
+        shell: powershell
+        run: Get-ChildItem -Path C:\deploy\publishkpilc  
+     
+      - name: Deploy to IIS folder
+        run: |
+          Copy-Item -Path "C:\deploy\publishkpilc\*" -Destination "E:\WEBRoot\KPILCGithub" -Recurse -Force     
