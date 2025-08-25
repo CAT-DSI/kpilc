@@ -1,7 +1,7 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: Build and Deploy KPILC .NET App (on Self-hosted)
+name: Build and Deploy EAD .NET App (on Self-hosted)
 
 on:
   push:
