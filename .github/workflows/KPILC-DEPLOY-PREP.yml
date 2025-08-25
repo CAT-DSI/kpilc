@@ -27,7 +27,7 @@ jobs:
       - name: Publish with MSBuild
         shell: powershell
         run: |
-         & "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe" API/CATLCR-BackEnd/CATLCR-BackEnd.csproj /t:Publish /p:Configuration=Release /p:PublishDir="C:\deploy\publish\"
+         & "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe" API/CATLCR-BackEnd/CATLCR-BackEnd.csproj /t:Publish /p:Configuration=Release /p:PublishDir="C:\deploy\publishkpilc\"
           
            
       - name: List publish directory
