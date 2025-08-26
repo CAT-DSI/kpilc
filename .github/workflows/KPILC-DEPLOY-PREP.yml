@@ -6,7 +6,7 @@ name: Build and Deploy KPILC .NET App (on Self-hosted)
 on:
   push:
     branches:
-      - main
+      - main1
 
 jobs:
   build-and-deploy:
