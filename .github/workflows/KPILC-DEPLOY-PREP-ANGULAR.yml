@@ -1,7 +1,6 @@
-# This workflow will build a .NET project1
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+# This workflow will build Angular project
 
-name: Build and Deploy KPILC .NET App (on Self-hosted)
+name: Build and Deploy Angular on Windows
 
 on:
   push:
@@ -10,30 +9,31 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: self-hosted  # Make sure your runner is registered as 'self-hosted'
+    runs-on: self-hosted
+    defaults:
+      run:
+        shell: powershell
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4      
-       
-      - name: Restore NuGet packages      
-        run: |
-         & "C:/Program Files (x86)/Microsoft Visual Studio/20222/BuildTools/MSBuild/Current/Bin/MSBuild.exe" API/CATLCR-BackEnd.sln /t:restore
+        uses: actions/checkout@v4
 
-      - name: Build with MSBuild
-        run: |
-          & "C:\Program Files (x86)\Microsoft Visual Studio\20222\BuildTools\MSBuild\Current\Bin\MSBuild.exe" API/CATLCR-BackEnd/CATLCR-BackEnd.csproj /p:Configuration=Release
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '12'
 
-        
-      - name: Publish with MSBuild
-        shell: powershell
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular app
+        run: npm run build -- --configuration production
+
+      - name: Deploy Angular app to IIS folder
         run: |
-         & "C:\Program Files (x86)\Microsoft Visual Studio\20222\BuildTools\MSBuild\Current\Bin\MSBuild.exe" API/CATLCR-BackEnd/CATLCR-BackEnd.csproj /t:Publish /p:Configuration=Release /p:PublishDir="C:\deploy\publishkpilc\"
-          
-           
-      - name: List publish directory
-        shell: powershell
-        run: Get-ChildItem -Path C:\deploy\publishkpilc  
-     
-      - name: Deploy to IIS folder
-        run: |
-          Copy-Item -Path "C:\deploy\publishkpilc\*" -Destination "E:\WEBRoot\KPILCGithub" -Recurse -Force     
+          $source = "dist\<your-angular-project-name>\*"
+          $destination = "E:\WEBRoot\kpilcangulargithub"
+          if (!(Test-Path $destination)) {
+            New-Item -ItemType Directory -Path $destination
+          }
+          Copy-Item $source $destination -Recurse -Force
