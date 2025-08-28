@@ -28,7 +28,7 @@ jobs:
         working-directory: ./Frontend
 
       - name: Build Angular app
-        run: npm run build -- --configuration production
+        run: npm run build -- --configuration UAT
         working-directory: ./Frontend
 
       - name: Deploy Angular app to IIS folder
